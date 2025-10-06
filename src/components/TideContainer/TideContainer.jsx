@@ -4,7 +4,7 @@ import './tide-container.css'
 
 function TideContainer() {
     const [data, setData] = useState({});
-    const [dateIndex, setDateIndex] = useState(1);
+    const [dateIndex, setDateIndex] = useState(new Date().getMonth());
     const [tides, setTides] = useState([]);
 
     useEffect(() => {
