@@ -26,7 +26,7 @@ function Tide({ tide: { date, day, isoDate, tide } }) {
                         {
                             tide.map((t, key) => <div key={key} className="flex flex-row justify-between px-2 rounded-md border border-white w-full h-fit bg-white/30">
                                 <p className='text-white '>{t.tideLevel.toFixed(1)}</p>
-                                <img src={highTideIcon} alt="Tide Icon" className='w-6' />
+                                <img src={t.tideLevel.toFixed(1) >= 3.0 ? highTideIcon : lowTideIcon} alt="Tide Icon" className='w-6' />
                                 <p className='text-white '>{convertTo12Hour(t.time)}</p>
                             </div>)
                         }
