@@ -11,7 +11,7 @@ function TideContainer() {
         fetch("https://bahagonoyapi.web.app/hagonoyTides.json")
             .then((res) => res.json())
             .then((data) => {
-                console.log(data.monthlyTide[dateIndex].dailyTide);
+                console.log(data.monthlyTide[dateIndex].month);
                 setTides(data.monthlyTide[dateIndex].dailyTide);
                 setData(data);
             })
@@ -36,7 +36,7 @@ function TideContainer() {
 
             <div className="flex flex-col gap-5 sm:h-60 md:h-1/4">
                 <div className="flex justify-between px-5 items-center w-full">
-                    <h1 className='text-white font-semibold text-xl'>{data.monthlyTide[dateIndex].month}</h1>
+                    <h1 className='text-white font-semibold text-xl'>{data.monthlyTide?.[dateIndex]?.month || 'Loading...'}</h1>
                     <h1 className='text-white font-semibold text-xl'>{data.year}</h1>
                 </div>
 
