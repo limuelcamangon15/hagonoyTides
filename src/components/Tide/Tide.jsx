@@ -24,11 +24,12 @@ function Tide({ tide: { date, day, isoDate, tide } }) {
                 <div className="flex justify-center items-center mt-7 h-full w-full pb-2.5">
                     <div className="flex flex-col items-center justify-center gap-1.5 h-full w-full mx-2">
                         {
-                            tide.map((t, key) => <div key={key} className="flex flex-row justify-between px-2 rounded-md border border-white w-full h-fit bg-white/30">
-                                <p className='text-white '>{t.tideLevel.toFixed(1)}</p>
-                                <img src={t.tideLevel.toFixed(1) >= 3.0 ? highTideIcon : lowTideIcon} alt="Tide Icon" className='w-6' />
-                                <p className='text-white '>{convertTo12Hour(t.time)}</p>
-                            </div>)
+                            tide.map((t, key) =>
+                                <div key={key} className={`flex flex-row justify-between px-2 rounded-md border border-white w-full h-fit ${t.tideLevel.toFixed(1) >= 3.0 ? `bg-[#B30909]/60` : `bg-white/30`}`}>
+                                    <p className='text-white '>{t.tideLevel.toFixed(1)}</p>
+                                    <img src={t.tideLevel.toFixed(1) >= 3.0 ? highTideIcon : lowTideIcon} alt="Tide Icon" className='w-6' />
+                                    <p className='text-white '>{convertTo12Hour(t.time)}</p>
+                                </div>)
                         }
                     </div>
                 </div>
