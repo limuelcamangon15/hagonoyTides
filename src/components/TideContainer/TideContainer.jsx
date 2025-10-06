@@ -21,18 +21,18 @@ function TideContainer() {
     return (
         <>
             <div className="flex flex-wrap flex-row justify-center items-center w-full gap-1">
-                <button className="text-white font-semibold bg-white/30 p-0.5 rounded-md" onClick={() => setDateIndex(0)}>Jan</button>
-                <button className="text-white font-semibold bg-white/30 p-0.5 rounded-md" onClick={() => setDateIndex(1)}>Feb</button>
-                <button className="text-white font-semibold bg-white/30 p-0.5 rounded-md" onClick={() => setDateIndex(2)}>Mar</button>
-                <button className="text-white font-semibold bg-white/30 p-0.5 rounded-md" onClick={() => setDateIndex(3)}>Apr</button>
-                <button className="text-white font-semibold bg-white/30 p-0.5 rounded-md" onClick={() => setDateIndex(4)}>May</button>
-                <button className="text-white font-semibold bg-white/30 p-0.5 rounded-md" onClick={() => setDateIndex(5)}>Jun</button>
-                <button className="text-white font-semibold bg-white/30 p-0.5 rounded-md" onClick={() => setDateIndex(6)}>Jul</button>
-                <button className="text-white font-semibold bg-white/30 p-0.5 rounded-md" onClick={() => setDateIndex(7)}>Aug</button>
-                <button className="text-white font-semibold bg-white/30 p-0.5 rounded-md" onClick={() => setDateIndex(8)}>Sep</button>
-                <button className="text-white font-semibold bg-white/30 p-0.5 rounded-md" onClick={() => setDateIndex(9)}>Oct</button>
-                <button className="text-white font-semibold bg-white/30 p-0.5 rounded-md" onClick={() => setDateIndex(10)}>Nov</button>
-                <button className="text-white font-semibold bg-white/30 p-0.5 rounded-md" onClick={() => setDateIndex(11)}>Dec</button>
+                <button className={`text-white font-semibold ${dateIndex == 0 ? `bg-[#0E2DA6]/30 border-white` : `bg-white/30 border-transparent`} border  p-0.5 rounded-md transition duration-500`} onClick={() => setDateIndex(0)}>Jan</button>
+                <button className={`text-white font-semibold ${dateIndex == 1 ? `bg-[#0E2DA6]/30 border-white` : `bg-white/30 border-transparent`} border  p-0.5 rounded-md transition duration-500`} onClick={() => setDateIndex(1)}>Feb</button>
+                <button className={`text-white font-semibold ${dateIndex == 2 ? `bg-[#0E2DA6]/30 border-white` : `bg-white/30 border-transparent`} border  p-0.5 rounded-md transition duration-500`} onClick={() => setDateIndex(2)}>Mar</button>
+                <button className={`text-white font-semibold ${dateIndex == 3 ? `bg-[#0E2DA6]/30 border-white` : `bg-white/30 border-transparent`} border  p-0.5 rounded-md transition duration-500`} onClick={() => setDateIndex(3)}>Apr</button>
+                <button className={`text-white font-semibold ${dateIndex == 4 ? `bg-[#0E2DA6]/30 border-white` : `bg-white/30 border-transparent`} border  p-0.5 rounded-md transition duration-500`} onClick={() => setDateIndex(4)}>May</button>
+                <button className={`text-white font-semibold ${dateIndex == 5 ? `bg-[#0E2DA6]/30 border-white` : `bg-white/30 border-transparent`} border  p-0.5 rounded-md transition duration-500`} onClick={() => setDateIndex(5)}>Jun</button>
+                <button className={`text-white font-semibold ${dateIndex == 6 ? `bg-[#0E2DA6]/30 border-white` : `bg-white/30 border-transparent`} border  p-0.5 rounded-md transition duration-500`} onClick={() => setDateIndex(6)}>Jul</button>
+                <button className={`text-white font-semibold ${dateIndex == 7 ? `bg-[#0E2DA6]/30 border-white` : `bg-white/30 border-transparent`} border  p-0.5 rounded-md transition duration-500`} onClick={() => setDateIndex(7)}>Aug</button>
+                <button className={`text-white font-semibold ${dateIndex == 8 ? `bg-[#0E2DA6]/30 border-white` : `bg-white/30 border-transparent`} border  p-0.5 rounded-md transition duration-500`} onClick={() => setDateIndex(8)}>Sep</button>
+                <button className={`text-white font-semibold ${dateIndex == 9 ? `bg-[#0E2DA6]/30 border-white` : `bg-white/30 border-transparent`} border  p-0.5 rounded-md transition duration-500`} onClick={() => setDateIndex(9)}>Oct</button>
+                <button className={`text-white font-semibold ${dateIndex == 10 ? `bg-[#0E2DA6]/30 border-white` : `bg-white/30 border-transparent`} border  p-0.5 rounded-md transition duration-500`} onClick={() => setDateIndex(10)}>Nov</button>
+                <button className={`text-white font-semibold ${dateIndex == 11 ? `bg-[#0E2DA6]/30 border-white` : `bg-white/30 border-transparent`} border  p-0.5 rounded-md transition duration-500`} onClick={() => setDateIndex(11)}>Dec</button>
             </div>
 
             <div className="flex flex-col gap-5 sm:h-60 md:h-1/4">
