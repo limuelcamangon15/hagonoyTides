@@ -36,7 +36,7 @@ function TideContainer() {
 
             <div className="flex flex-col gap-5 sm:h-60 md:h-1/4">
                 <div className="flex justify-between px-5 items-center w-full">
-                    <h1 className='text-white font-semibold text-xl'>{data.year}</h1>
+                    <h1 className='text-white font-semibold text-xl'>{data.monthlyTide[dateIndex].month}</h1>
                     <h1 className='text-white font-semibold text-xl'>{data.year}</h1>
                 </div>
 
