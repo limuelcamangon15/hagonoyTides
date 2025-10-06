@@ -6,6 +6,9 @@ function TideContainer() {
     const [data, setData] = useState({});
     const [dateIndex, setDateIndex] = useState(new Date().getMonth());
     const [tides, setTides] = useState([]);
+    const today = new Date().getDate();
+    const todayIndex = tides.findIndex(tide => tide.date == today);
+    const tideRefs = useRef([]);
 
     useEffect(() => {
         fetch("https://bahagonoyapi.web.app/hagonoyTides.json")
@@ -16,6 +19,16 @@ function TideContainer() {
                 setData(data);
             })
     }, [dateIndex]);
+
+    useEffect(() => {
+        if (todayIndex !== -1 && tideRefs.current[todayIndex]) {
+            tideRefs.current[todayIndex].scrollIntoView({
+                behavior: 'smooth',
+                inline: 'start',
+                block: 'nearest'
+            });
+        }
+    }, [tides]);
 
 
     return (
@@ -51,7 +64,10 @@ function TideContainer() {
                 <div className="flex flex-row gap-5 px-5 w-full h-full overflow-auto overflow-y-hidden">
                     <div className="flex flex-row gap-5 w-full">
                         {
-                            tides.map((tide, key) => <Tide tide={tide} key={key} dateIndex={dateIndex} />)
+                            tides.map((tide, key) =>
+                                <div key={key} ref={el => tideRefs.current[key] = el} className='min-w-fit min-h-fit'>
+                                    <Tide tide={tide} dateIndex={dateIndex} />
+                                </div>)
                         }
                     </div>
                 </div>
