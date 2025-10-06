@@ -12,7 +12,7 @@ function Tide({ tide: { date, day, isoDate, tide } }) {
                     <h1 className='text-white font-semibold text-sm'>{date}</h1>
                 </div>
 
-                <div className="flex justify-center items-center mt-7 h-300 bg-amber-200 w-full pb-5">
+                <div className="flex justify-center items-center mt-7 h-full w-full pb-5">
                     <div className="flex flex-col items-center justify-center gap-1.5 h-full w-full mx-2">
                         {
                             tide.map((t, key) => <div key={key} className="flex flex-row justify-between px-2 rounded-md border border-white w-full h-fit bg-white/30">
