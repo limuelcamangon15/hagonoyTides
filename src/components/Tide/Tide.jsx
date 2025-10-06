@@ -4,6 +4,15 @@ import lowTideIcon from '../../assets/low-tide-icon.png';
 
 function Tide({ tide: { date, day, isoDate, tide } }) {
 
+    function convertTo12Hour(time24) {
+        let [hour, minute] = time24.split(":").map(Number);
+        const ampm = hour >= 12 ? "PM" : "AM";
+
+        hour = hour % 12 || 12;
+
+        return `${hour}:${minute.toString().padStart(2, "0")} ${ampm}`;
+    }
+
     return (
         <>
             <div className="flex flex-col min-w-[50%] h-full bg-[#D9D9D9]/30 border border-white  rounded-xl custom-inner-shadow relative">
@@ -18,7 +27,7 @@ function Tide({ tide: { date, day, isoDate, tide } }) {
                             tide.map((t, key) => <div key={key} className="flex flex-row justify-between px-2 rounded-md border border-white w-full h-fit bg-white/30">
                                 <p className='text-white '>{t.tideLevel.toFixed(1)}</p>
                                 <img src={highTideIcon} alt="Tide Icon" className='w-6' />
-                                <p className='text-white '>{t.time}</p>
+                                <p className='text-white '>{convertTo12Hour(t.time)}</p>
                             </div>)
                         }
                     </div>
