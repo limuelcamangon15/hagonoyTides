@@ -51,7 +51,7 @@ function TideContainer() {
                 <div className="flex flex-row gap-5 px-5 w-full h-full overflow-auto overflow-y-hidden">
                     <div className="flex flex-row gap-5 w-full">
                         {
-                            tides.map((tide, key) => <Tide tide={tide} key={key} />)
+                            tides.map((tide, key) => <Tide tide={tide} key={key} dateIndex={dateIndex} />)
                         }
                     </div>
                 </div>
