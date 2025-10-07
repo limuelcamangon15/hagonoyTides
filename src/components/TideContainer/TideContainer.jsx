@@ -62,7 +62,7 @@ function TideContainer() {
                         {
                             data.monthlyTide &&
                             data.monthlyTide[dateIndex] &&
-                            data.monthlyTide[dateIndex].month || 'Loading...'
+                            data.monthlyTide[dateIndex].month || 'Loading Tides...'
                         }
                     </h1>
                     <h1 className='text-xl font-semibold text-white'>{data.year}</h1>
