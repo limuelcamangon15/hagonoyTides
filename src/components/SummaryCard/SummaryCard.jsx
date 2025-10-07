@@ -12,7 +12,7 @@ function SummaryCard({ lowTides, highTides }) {
 
                 <div className="relative flex flex-col h-full p-3 gap-7 rounded-xl bg-black/50 w-95 custom-drop-shadow">
                     <p className="text-xs font-semibold text-white md:text-sm">Total Low Tides</p>
-                    <p className="absolute text-2xl font-bold text-white bottom-2 right-3">{lowTides}</p>
+                    <p className="absolute font-bold text-white md:text-2xl sm:text-xl bottom-2 right-3">{lowTides}</p>
                 </div>
 
                 <div className="relative flex flex-col h-full p-3 gap-7 rounded-xl bg-black/50 w-95 custom-drop-shadow">
