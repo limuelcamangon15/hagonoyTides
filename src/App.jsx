@@ -51,10 +51,11 @@ function App() {
       <div className="flex flex-col gap-5 bg-[#060F28] w-screen h-screen">
         <Navbar />
 
-        <SummaryCard lowTides={totalLowTides} highTides={totalHighTides} />
+        <section className="flex flex-col w-full min-h-screen gap-5 xl:px-70">
+          <SummaryCard lowTides={totalLowTides} highTides={totalHighTides} />
 
-        <TideContainer />
-
+          <TideContainer />
+        </section>
       </div>
     </>
   );

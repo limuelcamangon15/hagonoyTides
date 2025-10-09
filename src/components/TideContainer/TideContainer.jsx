@@ -48,7 +48,7 @@ function TideContainer() {
     return (
         <>
 
-            <div className="flex flex-row flex-wrap items-center justify-center w-full gap-1">
+            <div className="flex flex-row flex-wrap items-center justify-center w-full gap-1 md:gap-3">
                 {
                     monthButtonData.map(
                         (monthData, key) => <button key={key} className={`text-white font-semibold ${dateIndex == monthData.monthValue ? `bg-[#0E2DA6]/30 border-white` : `bg-white/30 border-transparent`} border  p-0.5 rounded-md transition duration-500`} onClick={() => setDateIndex(monthData.monthValue)}>{monthData.month}</button>
