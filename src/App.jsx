@@ -54,6 +54,7 @@ function App() {
         <SummaryCard lowTides={totalLowTides} highTides={totalHighTides} />
 
         <TideContainer />
+
       </div>
     </>
   );
