@@ -7,8 +7,23 @@ function TideContainer() {
   const [dateIndex, setDateIndex] = useState(new Date().getMonth());
   const [tides, setTides] = useState([]);
   const today = new Date().getDate();
+  const monthToday = new Date().getMonth();
   const todayIndex = tides.findIndex((tide) => tide.date == today);
   const tideRefs = useRef([]);
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
   const monthButtonData = [
     { month: "Jan", monthValue: 0 },
     { month: "Feb", monthValue: 1 },
@@ -28,7 +43,10 @@ function TideContainer() {
     fetch("https://bahagonoyapi.web.app/hagonoyTides.json")
       .then((res) => res.json())
       .then((data) => {
-        console.log(data.monthlyTide[dateIndex].month);
+        console.log(
+          data.monthlyTide[dateIndex].month + " TODAY IS: " + months[monthToday]
+        );
+        console.log(months[monthToday] == data.monthlyTide[dateIndex].month);
         setTides(data.monthlyTide[dateIndex].dailyTide);
         setData(data);
       });
@@ -36,7 +54,9 @@ function TideContainer() {
 
   useEffect(() => {
     if (todayIndex !== -1 && tideRefs.current[todayIndex]) {
-      tideRefs.current[todayIndex].scrollIntoView({
+      tideRefs.current[
+        months[monthToday] == data.monthlyTide[dateIndex].month ? todayIndex : 0
+      ].scrollIntoView({
         behavior: "smooth",
         inline: "start",
         block: "nearest",
@@ -46,6 +66,7 @@ function TideContainer() {
 
   return (
     <>
+      {/* Months Container Button */}
       <div className="flex flex-row flex-wrap items-center justify-center w-full gap-1 md:gap-3">
         {monthButtonData.map((monthData, key) => (
           <button
@@ -62,7 +83,9 @@ function TideContainer() {
         ))}
       </div>
 
+      {/* Monthly Tides Container */}
       <div className="flex flex-col gap-5 sm:h-60 md:h-1/4">
+        {/* Month and Year Heading */}
         <div className="flex items-center justify-between w-full px-5">
           <h1 className="text-xl font-semibold text-white">
             {(data.monthlyTide &&
@@ -73,6 +96,7 @@ function TideContainer() {
           <h1 className="text-xl font-semibold text-white">{data.year}</h1>
         </div>
 
+        {/* Daily Tides */}
         <div className="flex flex-row w-full h-full gap-5 px-5 overflow-auto overflow-y-hidden">
           <div className="flex flex-row w-full gap-5">
             {tides.map((tide, key) => (
