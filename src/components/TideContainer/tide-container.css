@@ -1,3 +1,7 @@
 .month-btn-shadow {
-  box-shadow: 0px 0px 10px rgb(16, 16, 16) inset;
+  box-shadow: 0px 0px 5px rgba(13, 13, 14, 0.953) inset;
+}
+
+.month-btn-shadow-active {
+  box-shadow: 0px 0px 5px rgba(172, 172, 177, 0.953) inset;
 }
