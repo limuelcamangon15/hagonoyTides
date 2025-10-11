@@ -2,7 +2,7 @@ import logo from "../../assets/bahagonoy-icon-white.png";
 import { NavLink } from "react-router";
 import "./nav-bar.css";
 import "../../index.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function Navbar() {
   const [show, setShow] = useState(false);
@@ -10,6 +10,20 @@ function Navbar() {
   function toggleMenu() {
     setShow(!show);
   }
+
+  useEffect(() => {
+    function handleResize() {
+      if (window.innerWidth >= 1280) {
+        setShow(false);
+      }
+    }
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   return (
     <>
@@ -20,7 +34,7 @@ function Navbar() {
       >
         {/* Logo Section */}
         <div
-          className={`flex flex-row gap-2 items-center absolute top-2.5 lg:static`}
+          className={`flex flex-row gap-2 items-center absolute top-2.5 xl:static`}
         >
           <img src={logo} alt="HagonoyTides Icon" className="w-10" />
 
@@ -77,7 +91,7 @@ function Navbar() {
         )}
 
         <button
-          className={`md:block xl:hidden cursor-pointer px-1 py-1 font-bold text-white text-lg absolute top-2.5 lg:static right-2`}
+          className={`md:block xl:hidden cursor-pointer px-1 py-1 font-bold text-white text-lg absolute top-2.5 xl:static right-2`}
           onClick={toggleMenu}
         >
           <i
