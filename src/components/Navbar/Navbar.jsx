@@ -2,23 +2,35 @@ import logo from "../../assets/bahagonoy-icon-white.png";
 import { NavLink } from "react-router";
 import "./nav-bar.css";
 import "../../index.css";
+import { useState } from "react";
 
 function Navbar() {
+  const [show, setShow] = useState(false);
+
+  function toggleMenu() {
+    setShow(!show);
+  }
+
   return (
     <>
-      <nav className="flex flex-row justify-between items-center fixed top-0 px-2 py-2 bg-[#E8CACA]/50 w-screen h-fit box-shadow">
-        <div className="flex flex-row gap-2 items-center">
+      <nav
+        className={`flex flex-row justify-between items-center z-10 fixed top-0 px-2 py-2 w-screen h-fit box-shadow transition-all duration-700 ease-in-out ${
+          show ? "bg-[#515153] min-h-screen" : " bg-[#E8CACA]/50 min-h-[4rem]"
+        }`}
+      >
+        {/* Logo Section */}
+        <div
+          className={`flex flex-row gap-2 items-center absolute top-2.5 lg:static`}
+        >
           <img src={logo} alt="HagonoyTides Icon" className="w-10" />
 
-          <h1 className="hidden md:block text-xl text-white font-bold transition duration-600">
+          {/* System Name */}
+          <h1 className="block text-xl text-white font-bold transition duration-600">
             Hagonoy<span className="text-[#060F28]">Tides</span>
           </h1>
         </div>
 
-        <h1 className="md:hidden sm:block text-xl text-white font-bold transition duration-600">
-          Hagonoy<span className="text-[#060F28]">Tides</span>
-        </h1>
-
+        {/* Navigation Buttons for Desktop View */}
         <div className="hidden xl:flex gap-8 mr-5 items-center text-white font-semibold transition ease-in-out duration-500">
           <NavLink
             className="px-2 py-1 rounded-md transition ease-in-out duration-400 hover:bg-white/15"
@@ -40,8 +52,39 @@ function Navbar() {
           </NavLink>
         </div>
 
-        <button className="md:block xl:hidden cursor-pointer px-1 py-1 font-bold text-white text-lg">
-          ☰
+        {/* Navigation for Mobile View */}
+        {show && (
+          <div className="flex flex-col justify-center items-center gap-10 w-full text-xl text-white font-semibold transition ease-in-out duration-500">
+            <NavLink
+              className="px-2 py-1 rounded-md transition ease-in-out duration-400 w-1/4 text-center hover:bg-white/15"
+              to="/home"
+            >
+              Home
+            </NavLink>
+            <NavLink
+              className="px-2 py-1 rounded-md transition ease-in-out duration-400 w-1/4 text-center hover:bg-white/15"
+              to="/about"
+            >
+              About
+            </NavLink>
+            <NavLink
+              className="px-2 py-1 rounded-md transition ease-in-out duration-400 w-1/4 text-center hover:bg-white/15"
+              to="/contact"
+            >
+              Contact
+            </NavLink>
+          </div>
+        )}
+
+        <button
+          className={`md:block xl:hidden cursor-pointer px-1 py-1 font-bold text-white text-lg absolute top-2.5 lg:static right-2`}
+          onClick={toggleMenu}
+        >
+          <i
+            className={`fa-solid  text-3xl mt-1 w-[25px] hover:text-white/60 text-white transition ease-in-out duration-200 ${
+              show ? "fa-xmark" : "fa-bars"
+            }`}
+          ></i>
         </button>
       </nav>
     </>
