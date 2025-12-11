@@ -40,7 +40,7 @@ function Home() {
 
   return (
     <>
-      <div className="flex flex-col gap-5 bg-[#060F28] w-full min-h-full">
+      <div className="flex flex-col gap-5 custom-bg w-full min-h-full">
         <Navbar />
         <section className="flex flex-col w-full min-h-screen gap-5 xl:px-70">
           <SummaryCard lowTides={totalLowTides} highTides={totalHighTides} />

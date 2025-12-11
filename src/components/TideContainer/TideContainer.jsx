@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import Tide from "../Tide/Tide";
 import "./tide-container.css";
+import "../../index.css";
 
 function TideContainer() {
   const [data, setData] = useState({});
