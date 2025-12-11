@@ -20,3 +20,15 @@
     box-shadow: 0 0 0 rgba(255, 255, 255, 0.87);
   }
 }
+
+.custom-bg {
+  background: radial-gradient(125% 125% at 50% 100%, #000000 40%, #430167 100%);
+}
+
+::-webkit-scrollbar {
+  @apply bg-transparent h-2;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply rounded-full bg-white/40 backdrop-blur-2xl cursor-grabbing;
+}

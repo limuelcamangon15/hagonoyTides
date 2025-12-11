@@ -28,8 +28,8 @@ function Navbar() {
   return (
     <>
       <nav
-        className={`flex flex-row justify-between items-center z-10 fixed top-0 px-2 py-2 w-screen h-fit box-shadow transition-all duration-700 ease-in-out ${
-          show ? "bg-[#515153] min-h-screen" : " bg-[#E8CACA]/50 min-h-[4rem]"
+        className={`flex flex-row backdrop-blur-2xl bg-white/40 justify-between items-center z-10 fixed top-0 p-2 w-screen h-fit transition-all duration-700 ease-in-out ${
+          show ? "min-h-screen" : "min-h-[4rem]"
         }`}
       >
         {/* Logo Section */}
@@ -68,7 +68,7 @@ function Navbar() {
 
         {/* Navigation for Mobile View */}
         {show && (
-          <div className="flex flex-col justify-center items-center gap-10 w-full text-xl text-white font-semibold transition ease-in-out duration-500">
+          <div className="flex flex-col justify-center items-center gap-10 w-full text-xl text-white font-semibold transition-all duration-500">
             <NavLink
               className="px-2 py-1 rounded-md transition ease-in-out duration-400 w-1/4 text-center hover:bg-white/15"
               to="/home"
