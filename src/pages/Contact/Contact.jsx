@@ -2,7 +2,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import UnderDevelopment from "../../components/UnderDevelopment/UnderDevelopment";
 import "../../index.css";
 
-function About() {
+function Contact() {
   return (
     <>
       <div className="flex items-center justify-center w-screen min-h-dvh">
@@ -16,4 +16,4 @@ function About() {
   );
 }
 
-export default About;
+export default Contact;
