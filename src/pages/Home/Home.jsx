@@ -5,6 +5,7 @@ import TideContainer from "../../components/TideContainer/TideContainer";
 import "../../index.css";
 import Footer from "../../components/Footer/Footer";
 import GeneralChat from "../../components/GeneralChat/GeneralChat";
+import { motion, AnimatePresence } from "framer-motion";
 
 function Home() {
   const [monthlyTides, setMonthlyTides] = useState([]);
@@ -42,17 +43,25 @@ function Home() {
 
   return (
     <>
-      <div className="flex flex-col gap-5 custom-bg w-full min-h-dvh">
-        <Navbar />
-        <section className="flex flex-col w-full flex-1 gap-5 xl:px-70">
-          <SummaryCard lowTides={totalLowTides} highTides={totalHighTides} />
+      <AnimatePresence mode="wait">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 1, ease: "easeInOut" }}
+          className="flex flex-col gap-5 custom-bg w-full min-h-dvh"
+        >
+          <Navbar />
+          <section className="flex flex-col w-full flex-1 gap-5 xl:px-70">
+            <SummaryCard lowTides={totalLowTides} highTides={totalHighTides} />
 
-          <TideContainer />
+            <TideContainer />
 
-          <GeneralChat />
-        </section>
-        <Footer />
-      </div>
+            <GeneralChat />
+          </section>
+          <Footer />
+        </motion.div>
+      </AnimatePresence>
     </>
   );
 }
