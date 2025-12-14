@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+.animate-custom-pulse {
+  animation: pulseBorder 5s infinite;
+}
+
 .active {
   border: 2px solid rgba(255, 255, 255, 0.5);
   animation: pulseBorder 5s infinite;
@@ -25,10 +29,26 @@
   background: radial-gradient(125% 125% at 50% 100%, #000000 40%, #430167 100%);
 }
 
-::-webkit-scrollbar {
-  @apply bg-transparent h-2;
+/* DIV SCROLLBARS (generic rule) */
+div::-webkit-scrollbar {
+  @apply bg-transparent h-2 w-2;
 }
 
-::-webkit-scrollbar-thumb {
-  @apply rounded-full bg-white/40 backdrop-blur-2xl cursor-grabbing;
+div::-webkit-scrollbar-thumb {
+  @apply rounded-full bg-white/40 cursor-grab;
+}
+
+/* PAGE / BROWSER SCROLLBAR     */
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  @apply bg-transparent w-2;
+}
+
+html::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb {
+  @apply rounded-full bg-gray-700/50 cursor-grab;
+}
+
+body {
+  @apply m-0 bg-gray-950;
 }

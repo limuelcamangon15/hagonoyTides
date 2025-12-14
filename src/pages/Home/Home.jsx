@@ -3,6 +3,8 @@ import Navbar from "../../components/Navbar/Navbar";
 import SummaryCard from "../../components/SummaryCard/SummaryCard";
 import TideContainer from "../../components/TideContainer/TideContainer";
 import "../../index.css";
+import Footer from "../../components/Footer/Footer";
+import GeneralChat from "../../components/GeneralChat/GeneralChat";
 
 function Home() {
   const [monthlyTides, setMonthlyTides] = useState([]);
@@ -40,13 +42,16 @@ function Home() {
 
   return (
     <>
-      <div className="flex flex-col gap-5 custom-bg w-full min-h-full">
+      <div className="flex flex-col gap-5 custom-bg w-full min-h-dvh">
         <Navbar />
-        <section className="flex flex-col w-full min-h-screen gap-5 xl:px-70">
+        <section className="flex flex-col w-full flex-1 gap-5 xl:px-70">
           <SummaryCard lowTides={totalLowTides} highTides={totalHighTides} />
 
           <TideContainer />
+
+          <GeneralChat />
         </section>
+        <Footer />
       </div>
     </>
   );

@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import Tide from "../Tide/Tide";
 import "./tide-container.css";
 import "../../index.css";
+import { Loader } from "lucide-react";
 
 function TideContainer() {
   const [data, setData] = useState({});
@@ -91,14 +92,18 @@ function TideContainer() {
           <h1 className="text-xl font-semibold text-white">
             {(data.monthlyTide &&
               data.monthlyTide[dateIndex] &&
-              data.monthlyTide[dateIndex].month) ||
-              "Loading Tides..."}
+              data.monthlyTide[dateIndex].month) || (
+              <>
+                <p className="inline">Loading...</p>
+                <Loader className="inline ml-3 animate-spin" />
+              </>
+            )}
           </h1>
           <h1 className="text-xl font-semibold text-white">{data.year}</h1>
         </div>
 
         {/* Daily Tides */}
-        <div className="flex flex-row w-full h-full gap-5 px-5 overflow-auto overflow-y-hidden">
+        <div className="flex flex-row max-w-full h-full gap-5 px-5 overflow-auto overflow-y-hidden">
           <div className="flex flex-row w-full gap-5">
             {tides.map((tide, key) => (
               <div

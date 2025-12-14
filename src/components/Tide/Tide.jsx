@@ -20,9 +20,9 @@ function Tide({ tide: { date, day, isoDate, tide }, dateIndex }) {
       <div
         className={`flex flex-col min-w-[50%] h-full ${
           dateToday == date && monthToday == dateIndex
-            ? `bg-[#0E2DA6]/30`
-            : `bg-[#D9D9D9]/30`
-        } border border-white  rounded-xl custom-inner-shadow relative`}
+            ? `bg-[#0E2DA6]/30 border-white/80`
+            : `bg-[#D9D9D9]/30 border-white/50`
+        } border  rounded-xl custom-inner-shadow relative`}
       >
         <div className="flex justify-between items-center w-full px-2 absolute top-1 ">
           <h1 className="text-white font-semibold text-sm">{day}</h1>

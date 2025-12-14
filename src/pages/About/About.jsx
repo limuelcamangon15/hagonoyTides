@@ -4,7 +4,7 @@ import "../../index.css";
 function About() {
   return (
     <>
-      <div className="flex w-screen min-h-full bg-[#060F28]">
+      <div className="flex w-screen min-h-full bg-[#6f91f0]">
         <Navbar />
       </div>
     </>
