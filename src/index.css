@@ -29,9 +29,7 @@
   background: radial-gradient(125% 125% at 50% 100%, #000000 40%, #430167 100%);
 }
 
-/* ============================= */
 /* DIV SCROLLBARS (generic rule) */
-/* ============================= */
 div::-webkit-scrollbar {
   @apply bg-transparent h-2 w-2;
 }
@@ -40,9 +38,7 @@ div::-webkit-scrollbar-thumb {
   @apply rounded-full bg-white/40 cursor-grab;
 }
 
-/* ============================= */
 /* PAGE / BROWSER SCROLLBAR     */
-/* ============================= */
 html::-webkit-scrollbar,
 body::-webkit-scrollbar {
   @apply bg-transparent w-2;
