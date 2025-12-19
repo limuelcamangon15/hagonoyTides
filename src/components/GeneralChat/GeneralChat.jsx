@@ -75,16 +75,16 @@ function GeneralChat() {
     <>
       {/** Title Header */}
       <section className="w-full">
-        <h1 className="text-white text-lg font-semibold px-5">General Chat</h1>
+        <h1 className="text-white text-xl font-semibold px-5">General Chat</h1>
       </section>
 
       {/** Main Conversation */}
-      <p className="text-white text-sm italic">
+      <p className="text-yellow-200 text-sm italic">
         Notice (Early Testing Stage): The general chat is anonymous, however to
         lessen misinformation a location-based message identifier will be
         enforced, currently the location is fixed.
       </p>
-      <div className="flex flex-col max-h-[400px] w-full gap-3 px-30 py-5 justify-start items-center bg-white/10 rounded-lg backdrop-blur-2xl ">
+      <div className="flex flex-col max-h-[400px] w-full gap-3 px-3 md:px-10 lg:px-30 py-5 justify-start items-center bg-white/10 rounded-lg backdrop-blur-2xl ">
         {isConnecting ? (
           <p>Connecting...</p>
         ) : (
