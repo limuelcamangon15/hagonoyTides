@@ -38,6 +38,15 @@ textarea::-webkit-scrollbar-thumb {
   @apply rounded-full bg-white/40 cursor-grab;
 }
 
+/* SECTION SCROLLBARS (generic rule) */
+section::-webkit-scrollbar {
+  @apply bg-transparent h-2 w-2;
+}
+
+section::-webkit-scrollbar-thumb {
+  @apply rounded-full bg-white/40 cursor-grab;
+}
+
 /* DIV SCROLLBARS (generic rule) */
 div::-webkit-scrollbar {
   @apply bg-transparent h-2 w-2;
