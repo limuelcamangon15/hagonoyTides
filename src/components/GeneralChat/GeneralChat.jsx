@@ -79,7 +79,7 @@ function GeneralChat() {
       </section>
 
       {/** Main Conversation */}
-      <p className="text-yellow-200 text-sm italic">
+      <p className="text-yellow-200 text-sm italic px-5">
         Notice (Early Testing Stage): The general chat is anonymous, however to
         lessen misinformation a location-based message identifier will be
         enforced, currently the location is fixed.
