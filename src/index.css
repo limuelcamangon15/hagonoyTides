@@ -29,6 +29,15 @@
   background: radial-gradient(125% 125% at 50% 100%, #000000 40%, #430167 100%);
 }
 
+/* TEXTAREA SCROLLBARS (generic rule) */
+textarea::-webkit-scrollbar {
+  @apply bg-transparent h-2 w-2;
+}
+
+textarea::-webkit-scrollbar-thumb {
+  @apply rounded-full bg-white/40 cursor-grab;
+}
+
 /* DIV SCROLLBARS (generic rule) */
 div::-webkit-scrollbar {
   @apply bg-transparent h-2 w-2;
