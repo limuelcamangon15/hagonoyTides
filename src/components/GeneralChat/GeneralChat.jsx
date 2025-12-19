@@ -11,6 +11,42 @@ function GeneralChat() {
   const [isSending, setIsSending] = useState(false);
   const [isConnecting, setIsConnecting] = useState(true);
 
+  //handle fetching all previous messages
+  async function handleFetchMessages() {
+    try {
+      const res = await fetch(
+        "https://hagonoytides-backend-1.onrender.com/chats/messages"
+      );
+      const data = await res.json();
+
+      setMessages(data);
+    } catch (error) {
+      console.error(error);
+      alert("Something went wrong, please try again");
+    }
+  }
+
+  //handle sending new messages
+  function handleSend() {
+    setIsSending(true);
+    if (!text.trim()) return;
+
+    socket.emit("sendMessage", {
+      senderLocation: "Mecardo, Hagonoy, Bulacan",
+      message: text,
+    });
+
+    console.log("message sent!", text);
+    setText("");
+    setIsSending(false);
+  }
+
+  //get all previous messages using REST
+  useEffect(() => {
+    handleFetchMessages();
+  }, []);
+
+  //real-time messaging using WebSockets
   useEffect(() => {
     socket.connect();
 
@@ -29,19 +65,6 @@ function GeneralChat() {
     };
   }, []);
 
-  function handleSend() {
-    setIsSending(true);
-    if (!text.trim()) return;
-
-    socket.on("sendMessage", {
-      senderLocation: "Mecardo, Hagonoy, Bulacan",
-      message: text,
-    });
-
-    console.log("message sent!", text);
-    setText("");
-    setIsSending(false);
-  }
   return (
     <>
       {/** Title Header */}
