@@ -33,7 +33,7 @@ function GeneralChat() {
     if (!text.trim()) return;
 
     socket.emit("sendMessage", {
-      senderLocation: "Mecardo, Hagonoy, Bulacan",
+      senderLocation: "Sagrada Familia, Hagonoy, Bulacan",
       message: text,
     });
 
@@ -79,6 +79,11 @@ function GeneralChat() {
       </section>
 
       {/** Main Conversation */}
+      <p className="text-white text-sm italic">
+        Notice (Early Testing Stage): The general chat is anonymous, however to
+        lessen misinformation a location-based message identifier will be
+        enforced, currently the location is fixed.
+      </p>
       <div className="flex flex-col max-h-[400px] w-full gap-3 px-30 py-5 justify-start items-center bg-white/10 rounded-lg backdrop-blur-2xl ">
         {isConnecting ? (
           <p>Connecting...</p>
