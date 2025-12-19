@@ -19,12 +19,12 @@ function GeneralChat() {
       setIsConnecting(false);
     });
 
-    socket.on("receiveMessage", (data) => {
+    socket.on("receivedMessage", (data) => {
       setMessages((prev) => [...prev, data]);
     });
 
     return () => {
-      socket.off("receiveMessage");
+      socket.off("receivedMessage");
       socket.disconnect();
     };
   }, []);
@@ -38,7 +38,7 @@ function GeneralChat() {
       message: text,
     });
 
-    console.log("message sent!");
+    console.log("message sent!", text);
     setText("");
     setIsSending(false);
   }
