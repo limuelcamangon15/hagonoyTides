@@ -34,7 +34,7 @@ function Navbar() {
       >
         {/* Logo Section */}
         <div
-          className={`flex flex-row gap-2 items-center absolute top-2.5 xl:static`}
+          className={`flex px-5 flex-row gap-2 items-center absolute top-2.5 xl:static`}
         >
           <img src={logo} alt="HagonoyTides Icon" className="w-10" />
 
@@ -45,7 +45,7 @@ function Navbar() {
         </div>
 
         {/* Navigation Buttons for Desktop View */}
-        <div className="hidden xl:flex gap-8 mr-5 items-center text-white font-semibold transition ease-in-out duration-500">
+        <div className="hidden xl:flex gap-8 px-5 mr-5 items-center text-white font-semibold transition ease-in-out duration-500">
           <NavLink
             className="px-2 py-1 rounded-md transition ease-in-out duration-400 hover:bg-white/15"
             to="/home"
@@ -91,7 +91,7 @@ function Navbar() {
         )}
 
         <button
-          className={`md:block xl:hidden cursor-pointer px-1 py-1 font-bold text-white text-lg absolute top-2.5 xl:static right-2`}
+          className={`md:block xl:hidden cursor-pointer px-5 py-1 font-bold text-white text-lg absolute top-2.5 xl:static right-2`}
           onClick={toggleMenu}
         >
           <i

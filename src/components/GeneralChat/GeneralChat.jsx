@@ -86,7 +86,10 @@ function GeneralChat() {
       </p>
       <div className="flex flex-col max-h-[400px] w-full gap-3 px-3 md:px-10 lg:px-30 py-5 justify-start items-center bg-white/10 rounded-lg backdrop-blur-2xl ">
         {isConnecting ? (
-          <p>Connecting...</p>
+          <p>
+            Loading messages...{" "}
+            <Loader className="inline mr-5 text-white animate-spin" />
+          </p>
         ) : (
           <>
             {/** All Messages */}
@@ -109,7 +112,7 @@ function GeneralChat() {
                 className="flex items-end gap-3 max-w-4xl mx-auto 
                   bg-white/5 backdrop-blur-md 
                   border border-white/10 
-                  rounded-2xl p-3 shadow-lg"
+                  rounded-2xl p-2 shadow-lg"
               >
                 <textarea
                   className="flex-1 resize-none bg-transparent text-white 

@@ -8,5 +8,5 @@ export function formatDate(date) {
       minute: "2-digit",
       hour12: true,
     })
-    .replace(",", " at");
+    .replace(/,(?=[^,]*$)/, " at");
 }
