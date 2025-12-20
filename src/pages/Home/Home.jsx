@@ -6,6 +6,7 @@ import "../../index.css";
 import Footer from "../../components/Footer/Footer";
 import GeneralChat from "../../components/GeneralChat/GeneralChat";
 import { motion, AnimatePresence } from "framer-motion";
+import Snowfall from "react-snowfall";
 
 function Home() {
   const [monthlyTides, setMonthlyTides] = useState([]);
@@ -44,23 +45,24 @@ function Home() {
   return (
     <>
       <AnimatePresence mode="wait">
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 1, ease: "easeInOut" }}
-          className="flex flex-col gap-5 custom-bg w-full min-h-dvh"
-        >
+        <Snowfall enable3DRotation={true} color="#ffffff" />
+        <div className="flex flex-col gap-5 custom-bg w-full min-h-dvh">
           <Navbar />
-          <section className="flex flex-col w-full flex-1 gap-5 xl:px-70">
+          <motion.section
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1, ease: "easeInOut" }}
+            className="flex flex-col w-full flex-1 gap-5 xl:px-70"
+          >
             <SummaryCard lowTides={totalLowTides} highTides={totalHighTides} />
 
             <TideContainer />
 
             <GeneralChat />
-          </section>
+          </motion.section>
           <Footer />
-        </motion.div>
+        </div>
       </AnimatePresence>
     </>
   );
