@@ -46,7 +46,7 @@ function Home() {
     <>
       <AnimatePresence mode="wait">
         <Snowfall enable3DRotation={true} color="#ffffff" />
-        <div className="flex flex-col gap-5 custom-bg w-full min-h-dvh">
+        <div className="flex flex-col items-center gap-5 custom-bg w-full min-h-dvh">
           <Navbar />
           <motion.section
             initial={{ opacity: 0 }}
