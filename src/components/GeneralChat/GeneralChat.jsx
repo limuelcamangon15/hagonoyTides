@@ -86,9 +86,9 @@ function GeneralChat() {
       </p>
       <div className="flex flex-col max-h-[400px] w-full gap-3 px-3 md:px-10 lg:px-30 py-5 justify-start items-center bg-white/10 rounded-lg backdrop-blur-2xl ">
         {isConnecting ? (
-          <p>
-            Loading messages...{" "}
-            <Loader className="inline mr-5 text-white animate-spin" />
+          <p className="text-white/70">
+            Loading messages...
+            <Loader className="inline ml-5 text-white animate-spin" />
           </p>
         ) : (
           <>
