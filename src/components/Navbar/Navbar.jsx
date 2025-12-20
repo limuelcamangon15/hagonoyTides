@@ -28,7 +28,11 @@ function Navbar() {
   return (
     <>
       <nav
-        className={`flex flex-row backdrop-blur-md bg-white/25 justify-between items-center z-10 fixed top-2 p-2 w-[98%] rounded-3xl h-fit transition-all duration-700 ease-in-out ${
+        className={`flex flex-row backdrop-blur-md bg-white/25 justify-between items-center z-10 fixed p-2 ${
+          show
+            ? "w-screen top-0"
+            : "w-[98%] top-2 rounded-3xl border border-white/10"
+        } h-fit transition-all duration-700 ease-in-out ${
           show ? "min-h-screen" : "min-h-[4rem]"
         }`}
       >
