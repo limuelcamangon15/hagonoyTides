@@ -73,10 +73,10 @@ function TideContainer() {
         {monthButtonData.map((monthData, key) => (
           <button
             key={key}
-            className={`text-white cursor-pointer border month-btn-shadow hover:border-white/50 font-semibold ${
+            className={`cursor-pointer border month-btn-shadow hover:border-white/50 ${
               dateIndex == monthData.monthValue
-                ? `bg-[#0E2DA6]/30 border-white month-btn-shadow-active`
-                : `bg-white/30 border-transparent`
+                ? `bg-[#0E2DA6]/30 border-white text-white font-semibold month-btn-shadow-active`
+                : `bg-white/30 border-transparent text-white/70 font-normal`
             } p-0.5 rounded-md transition duration-500`}
             onClick={() => setDateIndex(monthData.monthValue)}
           >

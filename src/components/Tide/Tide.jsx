@@ -15,14 +15,18 @@ function Tide({ tide: { date, day, isoDate, tide }, dateIndex }) {
     return `${hour}:${minute.toString().padStart(2, "0")} ${ampm}`;
   }
 
+  function isToday(tideDateIndex) {
+    return dateToday == date && monthToday == tideDateIndex;
+  }
+
   return (
     <>
       <div
         className={`flex flex-col min-w-[50%] h-full ${
-          dateToday == date && monthToday == dateIndex
-            ? `bg-[#0E2DA6]/30 border-white/80`
-            : `bg-[#D9D9D9]/30 border-white/50`
-        } border  rounded-xl custom-inner-shadow relative`}
+          isToday(dateIndex)
+            ? `bg-[#0E2DA6]/30 border-white`
+            : `bg-[#D9D9D9]/30 border-white/30`
+        } border rounded-2xl custom-inner-shadow relative`}
       >
         <div className="flex justify-between items-center w-full px-2 absolute top-1 ">
           <h1 className="text-white font-semibold text-sm">{day}</h1>
@@ -34,13 +38,13 @@ function Tide({ tide: { date, day, isoDate, tide }, dateIndex }) {
             {tide.map((t, key) => (
               <div
                 key={key}
-                className={`flex flex-row justify-between px-2 rounded-md border border-white w-full h-fit ${
+                className={`flex flex-row justify-between text-sm tracking-wider gap-2 px-2 rounded-lg border border-white/30 w-full h-fit ${
                   t.tideLevel.toFixed(1) >= 3.0
-                    ? `bg-[#B30909]/60`
+                    ? `bg-[#B30909]/80`
                     : `bg-white/30`
                 }`}
               >
-                <p className="text-white ">{t.tideLevel.toFixed(1)}</p>
+                <p className="text-white">{t.tideLevel.toFixed(1)}</p>
                 <img
                   src={
                     t.tideLevel.toFixed(1) >= 3.0 ? highTideIcon : lowTideIcon
@@ -48,7 +52,7 @@ function Tide({ tide: { date, day, isoDate, tide }, dateIndex }) {
                   alt="Tide Icon"
                   className="w-6"
                 />
-                <p className="text-white ">{convertTo12Hour(t.time)}</p>
+                <p className="text-white">{convertTo12Hour(t.time)}</p>
               </div>
             ))}
           </div>
