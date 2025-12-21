@@ -38,7 +38,7 @@ function Tide({ tide: { date, day, isoDate, tide }, dateIndex }) {
             {tide.map((t, key) => (
               <div
                 key={key}
-                className={`flex flex-row justify-between text-sm tracking-wider gap-2 px-2 rounded-lg border border-white/30 w-full h-fit ${
+                className={`flex flex-row justify-between items-center text-sm tracking-wider gap-2 px-2 rounded-lg border border-white/30 w-full h-fit ${
                   t.tideLevel.toFixed(1) >= 3.0
                     ? `bg-[#B30909]/80`
                     : `bg-white/30`
