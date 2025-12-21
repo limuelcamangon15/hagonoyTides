@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from "react";
-import Message from "../Message/Message";
 import { Loader, Send } from "lucide-react";
-import "./general-chat.css";
-import { formatDate } from "../../utils/dateFormatter";
+import { formatDateOrTime } from "../../utils/dateFormatter";
 import { socket } from "../../utils/socket";
+import Message from "../Message/Message";
+import "./general-chat.css";
 
 function GeneralChat() {
   const [messages, setMessages] = useState([]);
@@ -84,7 +84,7 @@ function GeneralChat() {
         lessen misinformation a location-based message identifier will be
         enforced, currently the location is fixed.
       </p>
-      <div className="flex flex-col max-h-[400px] w-full gap-3 px-3 md:px-10 lg:px-30 py-5 justify-start items-center bg-white/10 rounded-lg backdrop-blur-2xl ">
+      <div className="flex flex-col self-center max-h-[400px] w-[96%] gap-3 px-3 md:px-10 lg:px-30 py-5 justify-start items-center bg-white/10 rounded-3xl backdrop-blur-2xl custom-inset-shadow">
         {isConnecting ? (
           <p className="text-white/70">
             Loading messages...
@@ -99,7 +99,7 @@ function GeneralChat() {
                   key={index}
                   senderLocation={m.senderLocation}
                   message={m.message}
-                  date={formatDate(m.createdAt)}
+                  date={formatDateOrTime(m.createdAt)}
                 />
               ))}
 
