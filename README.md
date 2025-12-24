@@ -2,6 +2,10 @@ HagonoyTides
 
 Front-end
 
+a simple tides monitoring and real-time general chat web app focused on solving common high-tide problems for the residents of Hagonoy, Bulacan, Philippines. 
+
+Visit this project live on https://hagonoy-tides.vercel.app 
+
 Currently, two official plugins are available:
 
 - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
