@@ -1,6 +1,10 @@
 HagonoyTides
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Front-end
+
+a simple tides monitoring and real-time general chat web app focused on solving common high-tide problems for the residents of Hagonoy, Bulacan, Philippines. 
+
+Visit this project live on https://hagonoy-tides.vercel.app 
 
 Currently, two official plugins are available:
 
