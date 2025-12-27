@@ -16,6 +16,16 @@ import "./weather.css";
 
 function Weather() {
   const [weather, setWeather] = useState();
+  const [location, setLocation] = useState();
+  const [temperature, setTemperature] = useState();
+  const [wind, setWind] = useState();
+  const [time, setTime] = useState(new Date());
+
+  useEffect(() => {
+    const interval = setInterval(() => setTime(new Date()), 1000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     fetchWeather();
@@ -28,17 +38,34 @@ function Weather() {
 
     const data = await res.json();
     console.log("fetched data::::", data);
-    setWeather(data);
+
+    console.log("setWeather", data.weather[0]);
+    setWeather(data.weather[0]);
+
+    console.log("setLocation", data.name);
+    setLocation(data.name);
+
+    console.log("setTemperature", data.main);
+    setTemperature(data.main);
+
+    console.log("setWind", data.wind);
+    setWind(data.wind);
   }
 
   return (
     <div className="flex flex-row justify-between p-1 gap-5 mt-23 mx-auto rounded-4xl border border-amber-400/20 backdrop-blur-2xl w-[95%] h-50">
       <div className="flex flex-row w-full bg-yellow-600/20 rounded-3xl text-white/50 px-5 py-5 md:px-20">
         {/* Left Side */}
-        <div className="flex flex-col w-1/2 justify-between">
+        <div className="flex flex-col w-1/2 justify-between text-left">
           <div className="">
-            <p className="text-white text-xl">Monday, 15 May</p>
-            <p>Hagonoy, Bulacan</p>
+            <p className="text-white text-xl">
+              {time.toLocaleString("en-PH", {
+                month: "long",
+                day: "numeric",
+                year: "numeric",
+              })}
+            </p>
+            <p>{location}</p>
           </div>
 
           <div>
@@ -48,10 +75,10 @@ function Weather() {
         </div>
 
         {/* Right Side */}
-        <div className="flex flex-col w-1/2 justify-between items-end">
+        <div className="flex flex-col w-1/2 justify-between items-end text-right">
           <div>
             <p>Today</p>
-            <p>4:15 AM</p>
+            <p>{time.toLocaleTimeString()}</p>
           </div>
 
           <div>
