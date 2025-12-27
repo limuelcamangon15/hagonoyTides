@@ -13,6 +13,7 @@ import rainyGIF from "../../assets/weather-gif/rainyGIF.gif";
 import thunderstormGIF from "../../assets/weather-gif/thunderstormGIF.gif";
 
 import "./weather.css";
+import AuroraBackground from "../ui/AuroraBackground";
 
 function Weather() {
   const [weather, setWeather] = useState();
@@ -20,6 +21,13 @@ function Weather() {
   const [temperature, setTemperature] = useState();
   const [wind, setWind] = useState();
   const [time, setTime] = useState(new Date());
+
+  const weatherBasedColors = {
+    sunny: ["#FF3C00", "#FFD700", "#00FFFF"],
+    cloudy: ["#6B5B95", "#FF6F61", "#88B04B"],
+    rainy: ["#001F3F", "#39CCCC", "#FF4136"],
+    thunderstorm: ["#FF00FF", "#00FF00", "#FFFF00"],
+  };
 
   useEffect(() => {
     const interval = setInterval(() => setTime(new Date()), 1000);
@@ -53,8 +61,14 @@ function Weather() {
   }
 
   return (
-    <div className="flex flex-row justify-between p-1 gap-5 mt-23 mx-auto rounded-4xl border border-amber-400/20 backdrop-blur-2xl w-[95%] h-50">
-      <div className="flex flex-row w-full bg-yellow-600/20 rounded-3xl text-white/50 px-5 py-5 md:px-20">
+    <div className="relative flex flex-row justify-between p-1 gap-5 mt-23 mx-auto rounded-4xl border border-amber-400/20 backdrop-blur-2xl w-[95%] h-50 overflow-hidden">
+      <AuroraBackground
+        colorStops={weatherBasedColors.thunderstorm}
+        blend={1}
+        amplitude={1.2}
+        speed={1}
+      />
+      <div className="z-10 flex flex-row w-full backdrop-blur-3xl rounded-3xl text-white/50 px-5 py-5 md:px-20">
         {/* Left Side */}
         <div className="flex flex-col w-1/2 justify-between text-left">
           <div className="">
