@@ -7,6 +7,7 @@ import Footer from "../../components/Footer/Footer";
 import GeneralChat from "../../components/GeneralChat/GeneralChat";
 import { motion, AnimatePresence } from "framer-motion";
 import Snowfall from "react-snowfall";
+import Weather from "../../components/Weather/Weather";
 
 function Home() {
   const [monthlyTides, setMonthlyTides] = useState([]);
@@ -55,7 +56,9 @@ function Home() {
             transition={{ duration: 1, ease: "easeInOut" }}
             className="flex flex-col w-full flex-1 gap-5 xl:px-70"
           >
-            <SummaryCard lowTides={totalLowTides} highTides={totalHighTides} />
+            {/*<SummaryCard lowTides={totalLowTides} highTides={totalHighTides} />*/}
+
+            <Weather />
 
             <TideContainer />
 
