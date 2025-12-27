@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Skeleton from "../ui/Skeleton";
 
 import cloudyPNG from "../../assets/weather-png/cloudy.png";
 import nightCloudyPNG from "../../assets/weather-png/nightCloudy.png";
@@ -70,28 +71,25 @@ function Weather() {
     }
   }
 
-  if (fetchingData) {
-    return (
-      <div className="relative flex flex-row justify-between p-1 gap-5 mt-23 mx-auto rounded-4xl border border-yellow-500/30 backdrop-blur-2xl w-[95%] h-50 overflow-hidden">
-        <p>Loadingggggggggggggggggggggg......</p>
-      </div>
-    );
-  }
-
   return (
     <div className="relative flex flex-row justify-between p-1 gap-5 mt-23 mx-auto rounded-4xl border border-yellow-500/30 backdrop-blur-2xl w-[95%] h-50 overflow-hidden">
-      {!fetchingData && location && weather && temperature && wind && (
-        <>
+      <>
+        {!fetchingData && (
           <AuroraBackground
             colorStops={weatherBasedColors.cloudy}
             blend={1}
             amplitude={1.2}
             speed={1}
           />
-          <div className="z-10 flex flex-row w-full backdrop-blur-3xl rounded-3xl text-white/50 px-5 py-5 md:px-20">
-            {/* Left Side */}
-            <div className="flex flex-col w-1/2 justify-between text-left">
-              <div className="">
+        )}
+
+        <div className="z-10 flex flex-row w-full backdrop-blur-3xl rounded-3xl text-white/50 px-5 py-5 md:px-20">
+          {/* Left Side */}
+          <div className="flex flex-col gap-2 w-1/2 justify-between text-left">
+            <div>
+              {fetchingData ? (
+                <Skeleton className="w-70 h-10 rounded-md" />
+              ) : (
                 <p className="text-white text-lg md:text-xl">
                   {time.toLocaleString("en-PH", {
                     month: "long",
@@ -99,35 +97,61 @@ function Weather() {
                     year: "numeric",
                   })}
                 </p>
+              )}
+
+              {fetchingData ? (
+                <Skeleton className="w-50 h-5 rounded-md mt-1" />
+              ) : (
                 <p>{location}, Bulacan</p>
-              </div>
+              )}
+            </div>
 
-              <div>
+            <div>
+              {fetchingData ? (
+                <Skeleton className="w-25 h-15 rounded-md" />
+              ) : (
                 <p className="bg-linear-to-t from-white to-white/50 bg-clip-text text-transparent w-fit text-5xl font-semibold">
-                  {temperature.temp.toFixed(0)}°C
+                  {temperature.temp.toFixed(0)} °C
                 </p>
+              )}
 
+              {fetchingData ? (
+                <Skeleton className="w-40 h-5 mt-1 rounded-md" />
+              ) : (
                 <p>
                   {weather.description.charAt(0).toUpperCase() +
                     weather.description.slice(1)}
                 </p>
-              </div>
-            </div>
-
-            {/* Right Side */}
-            <div className="flex flex-col w-1/2 justify-between items-end text-right">
-              <div>
-                <p>Today</p>
-                <p>{time.toLocaleTimeString()}</p>
-              </div>
-
-              <div>
-                <img src={cloudyPNG} alt="" className="w-28" />
-              </div>
+              )}
             </div>
           </div>
-        </>
-      )}
+
+          {/* Right Side */}
+          <div className="flex flex-col w-1/2 justify-between items-end text-right">
+            <div className="flex flex-col">
+              {fetchingData ? (
+                <Skeleton className="w-30 h-5 mt-1 rounded-md self-end" />
+              ) : (
+                <p>Today</p>
+              )}
+
+              {fetchingData ? (
+                <Skeleton className="w-40 h-5 mt-1 rounded-md" />
+              ) : (
+                <p>{time.toLocaleTimeString()}</p>
+              )}
+            </div>
+
+            <div>
+              {fetchingData ? (
+                <Skeleton className="w-30 h-22 mt-1 rounded-md" />
+              ) : (
+                <img src={cloudyPNG} alt="" className="w-28" />
+              )}
+            </div>
+          </div>
+        </div>
+      </>
     </div>
   );
 }
