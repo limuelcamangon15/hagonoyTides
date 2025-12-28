@@ -115,7 +115,9 @@ function Weather() {
                     {temperature.temp.toFixed(0)}
                   </p>
 
-                  <p className="inline text-white text-[1.5rem]">°C</p>
+                  <p className="inline text-white text-[1.5rem] font-semibold">
+                    °C
+                  </p>
                 </div>
               )}
 
