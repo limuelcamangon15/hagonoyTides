@@ -60,7 +60,7 @@ function GeneralChat() {
 
     socket.on("connect", () => {
       console.log("Connected:", socket.id);
-      setIsConnecting(false);
+      // setIsConnecting(false);
     });
 
     socket.on("receivedMessage", (data) => {

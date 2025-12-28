@@ -71,10 +71,10 @@ function Weather() {
       console.log("setWind", data.wind);
       setWind(data.wind);
 
-      setFetchingData(false);
+      // setFetchingData(false);
     } catch (error) {
       console.log(error);
-      setFetchingData(false);
+      // setFetchingData(false);
     }
   }
 
