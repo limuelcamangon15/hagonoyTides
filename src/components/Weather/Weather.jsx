@@ -88,7 +88,7 @@ function Weather() {
           <div className="flex flex-col gap-2 w-1/2 justify-between text-left">
             <div>
               {fetchingData ? (
-                <Skeleton className="w-70 h-10 rounded-md" />
+                <Skeleton className="w-30 md:w-70 h-10 rounded-md" />
               ) : (
                 <p className="text-white text-lg md:text-xl">
                   {time.toLocaleString("en-PH", {
@@ -100,7 +100,7 @@ function Weather() {
               )}
 
               {fetchingData ? (
-                <Skeleton className="w-50 h-5 rounded-md mt-1" />
+                <Skeleton className="w-20 md:w-50 h-5 rounded-md mt-1" />
               ) : (
                 <p>{location}, Bulacan</p>
               )}
