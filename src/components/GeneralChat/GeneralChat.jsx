@@ -90,15 +90,15 @@ function GeneralChat() {
         {isConnecting ? (
           <>
             <MessageSkeleton
-              senderLocationWidth="30"
-              messageWidth="60"
-              dateWidth="30"
+              senderLocationWidth={30}
+              messageWidth={60}
+              dateWidth={30}
             />
 
             <MessageSkeleton
-              senderLocationWidth="40"
-              messageWidth="30"
-              dateWidth="20"
+              senderLocationWidth={40}
+              messageWidth={30}
+              dateWidth={20}
             />
           </>
         ) : (
