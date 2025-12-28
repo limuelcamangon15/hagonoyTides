@@ -31,10 +31,11 @@ function Weather() {
   const [temperature, setTemperature] = useState();
   const [wind, setWind] = useState();
 
-  const [weatherIcon, setWeatherIcon] = useState();
-  const [weatherBackground, setWeatherBackground] = useState(
-    weatherBasedColors.cloudy
-  );
+  const [weatherUIAssets, setWeatherUIAssets] = useState({
+    color: ["#001F3F", "#0077B6", "#00B4D8"],
+    icon: "",
+    background: "",
+  });
 
   const [time, setTime] = useState(new Date());
 
@@ -80,20 +81,32 @@ function Weather() {
   function setWeatherThemeAndIcon(weatherType) {
     if (weatherType === "Clear") {
       // sunny
-      setWeatherIcon(sunnyPNG);
-      setWeatherBackground(weatherBasedColors.sunny);
+      setWeatherUIAssets({
+        color: weatherBasedColors.sunny,
+        icon: sunnyPNG,
+        background: sunnyGIF,
+      });
     } else if (weatherType === "Clouds") {
       // cloudy
-      setWeatherIcon(cloudyPNG);
-      setWeatherBackground(weatherBasedColors.cloudy);
+      setWeatherUIAssets({
+        color: weatherBasedColors.cloudy,
+        icon: cloudyPNG,
+        background: cloudyGIF,
+      });
     } else if (weatherType === "Rain" || weatherType === "Drizzle") {
       // rainy
-      setWeatherIcon(rainyPNG);
-      setWeatherBackground(weatherBasedColors.rainy);
+      setWeatherUIAssets({
+        color: weatherBasedColors.rainy,
+        icon: rainyPNG,
+        background: rainyGIF,
+      });
     } else if (weatherType === "Thunderstorm") {
       // stormy
-      setWeatherIcon(thunderstormPNG);
-      setWeatherBackground(weatherBasedColors.thunderstorm);
+      setWeatherUIAssets({
+        color: weatherBasedColors.thunderstorm,
+        icon: thunderstormPNG,
+        background: thunderstormGIF,
+      });
     } else {
       // fallback
     }
@@ -113,7 +126,7 @@ function Weather() {
 
         {!fetchingData && (
           <img
-            src={cloudyGIF}
+            src={weatherUIAssets.background}
             alt="rainy"
             className="absolute top-0 left-0 w-full h-full z-0"
           />
@@ -169,7 +182,7 @@ function Weather() {
           </div>
 
           {/* Right Side */}
-          <div className="flex flex-col w-1/2 justify-between items-end text-right">
+          <div className="flex flex-col gap-4 md:gap-2 w-1/2 justify-between items-end text-right">
             <div className="flex flex-col">
               {fetchingData ? (
                 <Skeleton className="w-25 md:w-30 h-5 mt-1 rounded-md self-end" />
@@ -188,7 +201,11 @@ function Weather() {
               {fetchingData ? (
                 <Skeleton className="w-30 h-22 mt-1 rounded-md" />
               ) : (
-                <img src={weatherIcon} alt="" className="w-28" />
+                <img
+                  src={weatherUIAssets.icon}
+                  alt=""
+                  className="w-25 md:w-28"
+                />
               )}
             </div>
           </div>
