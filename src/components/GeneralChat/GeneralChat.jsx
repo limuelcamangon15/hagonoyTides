@@ -6,6 +6,7 @@ import Message from "../Message/Message";
 import "./general-chat.css";
 import Skeleton from "../ui/Skeleton";
 import MessageSkeleton from "../Message/MessageSkeleton";
+import MessageInputSkeleton from "../Message/MessageInputSkeleton";
 
 function GeneralChat() {
   const [messages, setMessages] = useState([]);
@@ -60,7 +61,7 @@ function GeneralChat() {
 
     socket.on("connect", () => {
       console.log("Connected:", socket.id);
-      // setIsConnecting(false);
+      setIsConnecting(false);
     });
 
     socket.on("receivedMessage", (data) => {
@@ -100,6 +101,8 @@ function GeneralChat() {
               messageWidth="w-30"
               dateWidth="w-20"
             />
+
+            <MessageInputSkeleton />
           </>
         ) : (
           <>
