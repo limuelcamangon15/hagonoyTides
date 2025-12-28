@@ -89,17 +89,17 @@ function GeneralChat() {
       <div className="flex flex-col self-center max-h-[400px] w-[96%] gap-3 px-3 md:px-10 lg:px-30 py-5 justify-start items-center bg-white/10 rounded-3xl backdrop-blur-2xl custom-inset-shadow">
         {isConnecting ? (
           <>
-            <div className="flex flex-col gap-1 px-5 py-2 rounded-2xl w-full bg-gray-500/30 animate-pulse border-white/10">
-              <Skeleton className={`w-30 h-3`} />
-              <Skeleton className={`w-60 h-3`} />
-              <Skeleton className={`w-30 h-3 self-end`} />
-            </div>
+            <MessageSkeleton
+              senderLocationWidth="w-30"
+              messageWidth="w-60"
+              dateWidth="w-30"
+            />
 
-            <div className="flex flex-col gap-1 px-5 py-2 rounded-2xl w-full bg-gray-500/30 animate-pulse border-white/10">
-              <Skeleton className={`w-40 h-3`} />
-              <Skeleton className={`w-30 h-3`} />
-              <Skeleton className={`w-20 h-3 self-end`} />
-            </div>
+            <MessageSkeleton
+              senderLocationWidth="w-40"
+              messageWidth="w-30"
+              dateWidth="w-20"
+            />
           </>
         ) : (
           <>
