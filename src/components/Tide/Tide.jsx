@@ -1,6 +1,7 @@
 import "./tide.css";
 import highTideIcon from "../../assets/high-tide-icon.png";
 import lowTideIcon from "../../assets/low-tide-icon.png";
+import AuroraBackground from "../ui/AuroraBackground";
 
 function Tide({ tide: { date, day, isoDate, tide }, dateIndex }) {
   const dateToday = new Date().getDate();
@@ -19,15 +20,32 @@ function Tide({ tide: { date, day, isoDate, tide }, dateIndex }) {
     return dateToday == date && monthToday == tideDateIndex;
   }
 
+  function isDatePast(tideDateIndex) {
+    if (monthToday > tideDateIndex) return true;
+    if (monthToday < tideDateIndex) return false;
+    return dateToday > date;
+  }
+
   return (
     <>
       <div
-        className={`flex flex-col min-w-[50%] h-full ${
+        className={`relative overflow-hidden flex flex-col min-w-[50%] h-full 
+        ${
           isToday(dateIndex)
-            ? `bg-[#0E2DA6]/30 border-white`
-            : `bg-[#D9D9D9]/30 border-white/30`
-        } border rounded-2xl custom-inner-shadow relative`}
+            ? "border-white"
+            : "bg-[#D9D9D9]/30 border-white/30"
+        }
+        ${isDatePast(dateIndex) && "opacity-50"}
+         border rounded-2xl custom-inner-shadow`}
       >
+        {isToday(dateIndex) && (
+          <AuroraBackground
+            colorStops={["#1A0026", "#7C3AED", "#FF8A00"]}
+            blend={2}
+            amplitude={1.7}
+            speed={3}
+          />
+        )}
         <div className="flex justify-between items-center w-full px-2 absolute top-1 ">
           <h1 className="text-white font-semibold text-sm">{day}</h1>
           <h1 className="text-white font-semibold text-sm">{date}</h1>
@@ -38,7 +56,7 @@ function Tide({ tide: { date, day, isoDate, tide }, dateIndex }) {
             {tide.map((t, key) => (
               <div
                 key={key}
-                className={`flex flex-row justify-between items-center text-sm tracking-wider gap-2 px-2 rounded-lg border border-white/30 w-full h-fit ${
+                className={`z-10 flex flex-row justify-between items-center text-sm tracking-wider gap-2 px-2 rounded-lg border border-white/30 w-full h-fit ${
                   t.tideLevel.toFixed(1) >= 3.0
                     ? `bg-[#B30909]/80`
                     : `bg-white/30`
