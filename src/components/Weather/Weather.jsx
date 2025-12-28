@@ -113,7 +113,11 @@ function Weather() {
   }
 
   return (
-    <div className="relative flex flex-row justify-between p-1 gap-5 mt-23 mx-auto rounded-4xl border border-yellow-500/30 backdrop-blur-2xl w-[95%] h-50 overflow-hidden">
+    <div
+      className={`${
+        fetchingData && "animate-pulse bg-gray-500/30"
+      } relative flex flex-row justify-between p-1 gap-5 mt-23 mx-auto rounded-4xl border border-yellow-500/30 backdrop-blur-2xl w-[95%] h-50 overflow-hidden`}
+    >
       <>
         {/*!fetchingData && (
           <AuroraBackground
@@ -127,7 +131,7 @@ function Weather() {
         {!fetchingData && (
           <img
             src={weatherUIAssets.background}
-            alt="rainy"
+            alt="weather based background"
             className="absolute top-0 left-0 w-full h-full z-0"
           />
         )}
@@ -203,7 +207,7 @@ function Weather() {
               ) : (
                 <img
                   src={weatherUIAssets.icon}
-                  alt=""
+                  alt="weather image icon"
                   className="w-25 md:w-28"
                 />
               )}

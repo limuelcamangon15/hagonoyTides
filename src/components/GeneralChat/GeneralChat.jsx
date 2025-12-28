@@ -4,6 +4,8 @@ import { formatDateOrTime } from "../../utils/dateFormatter";
 import { socket } from "../../utils/socket";
 import Message from "../Message/Message";
 import "./general-chat.css";
+import Skeleton from "../ui/Skeleton";
+import MessageSkeleton from "../Message/MessageSkeleton";
 
 function GeneralChat() {
   const [messages, setMessages] = useState([]);
@@ -86,10 +88,19 @@ function GeneralChat() {
       </p>
       <div className="flex flex-col self-center max-h-[400px] w-[96%] gap-3 px-3 md:px-10 lg:px-30 py-5 justify-start items-center bg-white/10 rounded-3xl backdrop-blur-2xl custom-inset-shadow">
         {isConnecting ? (
-          <p className="text-white/70">
-            Loading messages...
-            <Loader className="inline ml-5 text-white animate-spin" />
-          </p>
+          <>
+            <MessageSkeleton
+              senderLocationWidth="30"
+              messageWidth="60"
+              dateWidth="30"
+            />
+
+            <MessageSkeleton
+              senderLocationWidth="40"
+              messageWidth="30"
+              dateWidth="20"
+            />
+          </>
         ) : (
           <>
             {/** All Messages */}
