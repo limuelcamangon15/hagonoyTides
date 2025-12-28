@@ -88,7 +88,7 @@ function Weather() {
           <div className="flex flex-col gap-2 w-1/2 justify-between text-left">
             <div>
               {fetchingData ? (
-                <Skeleton className="w-30 md:w-70 h-10 rounded-md" />
+                <Skeleton className="w-33 md:w-70 h-10 rounded-md" />
               ) : (
                 <p className="text-white text-lg md:text-xl">
                   {time.toLocaleString("en-PH", {
@@ -100,7 +100,7 @@ function Weather() {
               )}
 
               {fetchingData ? (
-                <Skeleton className="w-20 md:w-50 h-5 rounded-md mt-1" />
+                <Skeleton className="w-30 md:w-50 h-5 rounded-md mt-1" />
               ) : (
                 <p>{location}, Bulacan</p>
               )}
@@ -111,14 +111,14 @@ function Weather() {
                 <Skeleton className="w-25 h-15 rounded-md" />
               ) : (
                 <p className="bg-linear-to-t from-white to-white/50 bg-clip-text text-transparent w-fit text-5xl font-semibold">
-                  {temperature.temp.toFixed(0)} °C
+                  {temperature.temp.toFixed(0)}°C
                 </p>
               )}
 
               {fetchingData ? (
-                <Skeleton className="w-40 h-5 mt-1 rounded-md" />
+                <Skeleton className="w-30 md:w-40 h-5 mt-1 rounded-md" />
               ) : (
-                <p>
+                <p className="text-white">
                   {weather.description.charAt(0).toUpperCase() +
                     weather.description.slice(1)}
                 </p>
@@ -130,13 +130,13 @@ function Weather() {
           <div className="flex flex-col w-1/2 justify-between items-end text-right">
             <div className="flex flex-col">
               {fetchingData ? (
-                <Skeleton className="w-30 h-5 mt-1 rounded-md self-end" />
+                <Skeleton className="w-25 md:w-30 h-5 mt-1 rounded-md self-end" />
               ) : (
                 <p>Today</p>
               )}
 
               {fetchingData ? (
-                <Skeleton className="w-40 h-5 mt-1 rounded-md" />
+                <Skeleton className="w-33 md:w-40 h-5 mt-1 rounded-md" />
               ) : (
                 <p>{time.toLocaleTimeString()}</p>
               )}
