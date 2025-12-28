@@ -110,9 +110,13 @@ function Weather() {
               {fetchingData ? (
                 <Skeleton className="w-25 h-15 rounded-md" />
               ) : (
-                <p className="bg-linear-to-t from-white to-white/50 bg-clip-text text-transparent w-fit text-5xl font-semibold">
-                  {temperature.temp.toFixed(0)}°C
-                </p>
+                <div className="flex">
+                  <p className="bg-linear-to-t from-white to-white/50 bg-clip-text text-transparent w-fit text-5xl font-semibold">
+                    {temperature.temp.toFixed(0)}
+                  </p>
+
+                  <p className="inline text-white text-[1.5rem]">°C</p>
+                </div>
               )}
 
               {fetchingData ? (
