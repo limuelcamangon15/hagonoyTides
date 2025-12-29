@@ -28,7 +28,7 @@ function Navbar() {
   return (
     <>
       <nav
-        className={`flex flex-row backdrop-blur-md bg-white/25 justify-between items-center z-10 fixed p-2 ${
+        className={`flex flex-row backdrop-blur-md bg-white/25 justify-between items-center z-100 fixed p-2 ${
           show
             ? "w-screen top-0"
             : "w-[98%] top-2 rounded-3xl border border-white/10"

@@ -1,7 +1,6 @@
 import "./tide.css";
-import highTideIcon from "../../assets/high-tide-icon.png";
-import lowTideIcon from "../../assets/low-tide-icon.png";
 import AuroraBackground from "../ui/AuroraBackground";
+import TideDetailsContainer from "../TideDetailsContainer/TideDetailsContainer";
 
 function Tide({ tide: { date, day, isoDate, tide }, dateIndex }) {
   const dateToday = new Date().getDate();
@@ -54,24 +53,11 @@ function Tide({ tide: { date, day, isoDate, tide }, dateIndex }) {
         <div className="flex justify-center items-center mt-7 h-full w-full pb-2.5">
           <div className="flex flex-col items-center justify-center gap-1.5 h-full w-full mx-2">
             {tide.map((t, key) => (
-              <div
+              <TideDetailsContainer
                 key={key}
-                className={`z-10 flex flex-row justify-between items-center text-sm tracking-wider gap-2 px-2 rounded-lg border border-white/30 w-full h-fit ${
-                  t.tideLevel.toFixed(1) >= 3.0
-                    ? `bg-[#B30909]/80`
-                    : `bg-white/30`
-                }`}
-              >
-                <p className="text-white">{t.tideLevel.toFixed(1)}</p>
-                <img
-                  src={
-                    t.tideLevel.toFixed(1) >= 3.0 ? highTideIcon : lowTideIcon
-                  }
-                  alt="Tide Icon"
-                  className="w-6"
-                />
-                <p className="text-white">{convertTo12Hour(t.time)}</p>
-              </div>
+                time={convertTo12Hour(t.time)}
+                tideLevel={t.tideLevel.toFixed(1)}
+              />
             ))}
           </div>
         </div>
