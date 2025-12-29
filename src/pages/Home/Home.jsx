@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import Navbar from "../../components/Navbar/Navbar";
-import SummaryCard from "../../components/SummaryCard/SummaryCard";
 import TideContainer from "../../components/TideContainer/TideContainer";
-import "../../index.css";
+import SummaryCard from "../../components/SummaryCard/SummaryCard";
 import Footer from "../../components/Footer/Footer";
 import GeneralChat from "../../components/GeneralChat/GeneralChat";
-import { motion, AnimatePresence } from "framer-motion";
-import Snowfall from "react-snowfall";
 import Weather from "../../components/Weather/Weather";
+import Snowfall from "react-snowfall";
+import { motion, AnimatePresence } from "framer-motion";
+import "../../index.css";
 
 function Home() {
   const [monthlyTides, setMonthlyTides] = useState([]);
@@ -43,10 +43,18 @@ function Home() {
       });
   }, []);
 
+  function isTodayDecember() {
+    const monthToday = new Date().getMonth() + 1;
+
+    return monthToday == 12;
+  }
+
   return (
     <>
       <AnimatePresence mode="wait">
-        <Snowfall enable3DRotation={true} color="#ffffff" />
+        {isTodayDecember() && (
+          <Snowfall enable3DRotation={true} color="#ffffff" />
+        )}
         <div className="flex flex-col items-center gap-5 custom-bg w-full min-h-dvh">
           <Navbar />
           <motion.section
