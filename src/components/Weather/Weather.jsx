@@ -143,7 +143,7 @@ function Weather() {
               {fetchingData ? (
                 <Skeleton className="w-33 md:w-70 h-10 rounded-md" />
               ) : (
-                <p className="text-white text-lg md:text-xl">
+                <p className="text-white text-lg md:text-2xl">
                   {time.toLocaleString("en-PH", {
                     month: "long",
                     day: "numeric",

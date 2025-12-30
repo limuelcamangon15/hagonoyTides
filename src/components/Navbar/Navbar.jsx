@@ -11,6 +11,20 @@ function Navbar() {
     setShow(!show);
   }
 
+  //Mobile View: disbale main content scroll when navbar is toggled
+  useEffect(() => {
+    if (show) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [show]);
+
+  //auto close mobile view's navbar when screen width widen while left toggled and
   useEffect(() => {
     function handleResize() {
       if (window.innerWidth >= 1280) {
