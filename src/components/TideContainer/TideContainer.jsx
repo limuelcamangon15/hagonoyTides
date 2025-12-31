@@ -42,14 +42,20 @@ function TideContainer() {
   ];
 
   useEffect(() => {
-    fetch("https://bahagonoyapi.web.app/hagonoyTides.json")
+    //fetch("https://bahagonoyapi.web.app/hagonoyTides.json")
+    fetch(
+      "https://hagonoytides-backend-1.onrender.com/tide/get/byYear?year=2026"
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log(
-          data.monthlyTide[dateIndex].month + " TODAY IS: " + months[monthToday]
+          data.monthlyTides[dateIndex].month +
+            " TODAY IS: " +
+            months[monthToday]
         );
-        console.log(months[monthToday] == data.monthlyTide[dateIndex].month);
-        setTides(data.monthlyTide[dateIndex].dailyTide);
+        console.log(months[monthToday] == data.monthlyTides[dateIndex].month);
+        console.log(data.monthlyTides[dateIndex].dailyTides);
+        setTides(data.monthlyTides[dateIndex].dailyTides);
         setData(data);
       });
   }, [dateIndex]);
@@ -57,7 +63,9 @@ function TideContainer() {
   useEffect(() => {
     if (todayIndex !== -1 && tideRefs.current[todayIndex]) {
       tideRefs.current[
-        months[monthToday] == data.monthlyTide[dateIndex].month ? todayIndex : 0
+        months[monthToday] == data.monthlyTides[dateIndex].month
+          ? todayIndex
+          : 0
       ].scrollIntoView({
         behavior: "smooth",
         inline: "start",
@@ -90,9 +98,9 @@ function TideContainer() {
         {/* Month and Year Heading */}
         <div className="flex items-center justify-between w-full px-5">
           <h1 className="text-xl font-semibold text-white">
-            {(data.monthlyTide &&
-              data.monthlyTide[dateIndex] &&
-              data.monthlyTide[dateIndex].month) || (
+            {(data.monthlyTides &&
+              data.monthlyTides[dateIndex] &&
+              data.monthlyTides[dateIndex].month) || (
               <>
                 <p className="inline">Loading...</p>
                 <Loader className="inline ml-3 animate-spin" />

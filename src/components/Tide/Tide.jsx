@@ -2,7 +2,7 @@ import "./tide.css";
 import AuroraBackground from "../ui/AuroraBackground";
 import TideDetailsContainer from "../TideDetailsContainer/TideDetailsContainer";
 
-function Tide({ tide: { date, day, isoDate, tide }, dateIndex }) {
+function Tide({ tide: { date, day, isoDate, tides }, dateIndex }) {
   const dateToday = new Date().getDate();
   const monthToday = new Date().getMonth();
 
@@ -52,7 +52,7 @@ function Tide({ tide: { date, day, isoDate, tide }, dateIndex }) {
 
         <div className="flex justify-center items-center mt-7 h-full w-full pb-2.5">
           <div className="flex flex-col items-center justify-center gap-1.5 h-full w-full mx-2">
-            {tide.map((t, key) => (
+            {tides.map((t, key) => (
               <TideDetailsContainer
                 key={key}
                 time={convertTo12Hour(t.time)}
