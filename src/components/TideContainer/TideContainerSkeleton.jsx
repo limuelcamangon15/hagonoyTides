@@ -1,17 +1,20 @@
 import Skeleton from "../ui/Skeleton";
 
-function TideContainerSkeleton() {
+function TideContainerSkeleton({ countOfSkeletons }) {
+  const skeletonsArray = new Array(countOfSkeletons).fill(countOfSkeletons);
+
   return (
-    <div className="flex flex-col  gap-1 bg-gray-500/30 rounded-3xl w-full md:w-40 h-30 p-2">
-      <div className="flex justify-between gap-1">
-        <Skeleton className="w-15 h-3" />
-        <Skeleton className="w-8 h-3" />
+    <div className="flex flex-col gap-2 bg-gray-500/30 rounded-2xl min-w-38 md:w-40 h-full p-2">
+      <div className="flex justify-between gap-10">
+        <Skeleton className="w-15 h-4" />
+        <Skeleton className="w-5 h-4" />
       </div>
 
-      <Skeleton className="w-full h-5" />
-      <Skeleton className="w-full h-5" />
-      <Skeleton className="w-full h-5" />
-      <Skeleton className="w-full h-5" />
+      <div className="flex flex-col gap-1 w-full min-h-fit max-h-fit">
+        {skeletonsArray.map((_, index) => (
+          <Skeleton key={index} className="w-full h-7" />
+        ))}
+      </div>
     </div>
   );
 }
