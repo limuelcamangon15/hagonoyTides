@@ -132,15 +132,15 @@ function TideContainer() {
         {/* Month and Year Heading */}
         <div className="flex items-center justify-between w-full px-5">
           <h1 className="text-xl font-semibold text-white">
-            {!isLoading ? <Skeleton className="w-30 h-6" /> : months[dateIndex]}
+            {isLoading ? <Skeleton className="w-30 h-6" /> : months[dateIndex]}
           </h1>
           <h1 className="text-xl font-semibold text-white">
-            {!isLoading ? <Skeleton className="w-20 h-6" /> : data.year}
+            {isLoading ? <Skeleton className="w-20 h-6" /> : data.year}
           </h1>
         </div>
 
         {/* Daily Tid(es */}
-        {!isLoading ? (
+        {isLoading ? (
           <>
             <div className="flex flex-row px-5 animate-pulse max-w-full h-full gap-5 overflow-auto overflow-y-hidden">
               <TideContainerSkeleton countOfSkeletons={2} />
