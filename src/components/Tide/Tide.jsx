@@ -37,14 +37,22 @@ function Tide({ tide: { date, day, isoDate, tides }, dateIndex }) {
         ${isDatePast(dateIndex) && "opacity-50"}
          border rounded-2xl custom-inner-shadow`}
       >
-        {isToday(dateIndex) && (
-          <AuroraBackground
-            colorStops={["#1A0026", "#7C3AED", "#FF8A00"]}
-            blend={2}
-            amplitude={1.7}
-            speed={3}
-          />
-        )}
+        {isToday(dateIndex) &&
+          (tides.some((t) => t.tideLevel >= 3.0) ? (
+            <AuroraBackground
+              colorStops={["#1A0026", "#7C3AED", "#FF8A00"]}
+              blend={2}
+              amplitude={1.7}
+              speed={3}
+            />
+          ) : (
+            <AuroraBackground
+              colorStops={["#052014", "#22C55E", "#A3E635"]}
+              blend={2}
+              amplitude={1.7}
+              speed={3}
+            />
+          ))}
         <div className="flex justify-between items-center w-full px-2 absolute top-1 ">
           <h1 className="text-white font-semibold text-sm">{day}</h1>
           <h1 className="text-white font-semibold text-sm">{date}</h1>
