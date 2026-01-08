@@ -7,7 +7,7 @@ function Footer() {
         </p>
 
         <p className="text-xs lg:md text-white/70 text-center">
-          Powered By{" "}
+          Developed By{" "}
           <span className=" text-green-700 font-semibold">
             Lims {new Date().getFullYear()}
           </span>
