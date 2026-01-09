@@ -3,10 +3,9 @@ import { Loader, Send } from "lucide-react";
 import { formatDateOrTime } from "../../utils/dateFormatter";
 import { socket } from "../../utils/socket";
 import Message from "../Message/Message";
-import "./general-chat.css";
-import Skeleton from "../ui/Skeleton";
 import MessageSkeleton from "../Message/MessageSkeleton";
 import MessageInputSkeleton from "../Message/MessageInputSkeleton";
+import "./general-chat.css";
 
 function GeneralChat() {
   const [messages, setMessages] = useState([]);
@@ -44,6 +43,9 @@ function GeneralChat() {
     setText("");
     setIsSending(false);
   }
+
+  //request for location permission
+  useEffect(() => {}, []);
 
   //auto scroll to the latest message
   useEffect(() => {
