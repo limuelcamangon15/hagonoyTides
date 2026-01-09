@@ -1,8 +1,8 @@
-import logo from "../../assets/bahagonoy-icon-white.png";
 import { NavLink } from "react-router";
+import { useEffect, useState } from "react";
+import logo from "../../assets/bahagonoy-icon-white.png";
 import "./nav-bar.css";
 import "../../index.css";
-import { useEffect, useState } from "react";
 
 function Navbar() {
   const [show, setShow] = useState(false);
@@ -51,8 +51,9 @@ function Navbar() {
         }`}
       >
         {/* Logo Section */}
-        <div
-          className={`flex px-5 flex-row gap-2 items-center absolute top-2.5 xl:static`}
+        <NavLink
+          className={`flex px-5 flex-row gap-2 items-center absolute top-2.5 xl:static border-0! animate-none! bg-transparent! scale-100!`}
+          to="/home"
         >
           <img src={logo} alt="HagonoyTides Icon" className="w-10" />
 
@@ -60,7 +61,7 @@ function Navbar() {
           <h1 className="block text-xl text-white font-bold transition duration-600">
             Hagonoy<span className="text-[#060F28]">Tides</span>
           </h1>
-        </div>
+        </NavLink>
 
         {/* Navigation Buttons for Desktop View */}
         <div className="hidden xl:flex gap-8 px-5 mr-5 items-center text-white font-semibold transition ease-in-out duration-500">
