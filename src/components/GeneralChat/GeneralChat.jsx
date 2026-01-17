@@ -135,10 +135,9 @@ function GeneralChat() {
       </section>
 
       {/** Main Conversation */}
-      <p className="text-yellow-200 text-sm italic px-5">
-        Notice (Early Testing Stage): The general chat is anonymous, however to
-        lessen misinformation a location-based message identifier will be
-        enforced, currently the location is fixed.
+      <p className="text-white/70 text-sm italic px-5">
+        Chat anonymously with fellow Hagonoeños about tides, weather, and local
+        conditions.
       </p>
       <div className="flex flex-col self-center max-h-[400px] w-[96%] gap-3 px-3 md:px-10 lg:px-30 py-5 justify-start items-center bg-white/10 rounded-3xl backdrop-blur-2xl custom-inset-shadow">
         {isConnecting ? (
