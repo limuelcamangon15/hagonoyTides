@@ -12,6 +12,7 @@ function GeneralChat() {
   const [text, setText] = useState("");
   const [isSending, setIsSending] = useState(false);
   const [isConnecting, setIsConnecting] = useState(true);
+
   const messagesEndRef = useRef(null);
 
   //handle fetching all previous messages
@@ -29,13 +30,31 @@ function GeneralChat() {
     }
   }
 
+  //handle fetching the decoded coordinates of a user
+  async function handleFetchDecodeCoordinates(lat, lon) {
+    try {
+      const res = await fetch(
+        `https://hagonoytides-backend-1.onrender.com/chats/senderLocation?lat=${lat}&lon=${lon}`
+      );
+
+      const data = await res.json();
+      const senderLoc = data.features[0].properties.name;
+
+      console.log("senderLOcation::::::", senderLoc);
+      console.log("HOYYYYYYYYYYYY");
+      return senderLoc;
+    } catch (error) {
+      console.error("Something went wrong decoding coordinates", error);
+    }
+  }
+
   //handle sending new messages
-  function handleSend() {
+  function handleSend(location) {
     setIsSending(true);
     if (!text.trim()) return;
 
     socket.emit("sendMessage", {
-      senderLocation: "Sagrada Familia, Hagonoy, Bulacan",
+      senderLocation: location || "From Unknown Location",
       message: text,
     });
 
@@ -44,8 +63,40 @@ function GeneralChat() {
     setIsSending(false);
   }
 
-  //request for location permission
-  useEffect(() => {}, []);
+  function handleRequestLocationPermission() {
+    if (!navigator.geolocation) {
+      return alert(
+        "Sorry, you cannot send a message since your browser is not supported with geolocation"
+      );
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      async (position) => {
+        const { latitude, longitude } = position.coords;
+
+        const location = await handleFetchDecodeCoordinates(
+          latitude,
+          longitude
+        );
+
+        handleSend(location);
+      },
+      (error) => {
+        console.log(
+          "something went wrong getting users current location",
+          error
+        );
+
+        setText("");
+        return alert("Location permission must be allowed to send a message.");
+      },
+      {
+        enableHighAccuracy: false,
+        timeout: 10000,
+        maximumAge: 60000,
+      }
+    );
+  }
 
   //auto scroll to the latest message
   useEffect(() => {
@@ -144,7 +195,7 @@ function GeneralChat() {
                 />
 
                 <button
-                  onClick={handleSend}
+                  onClick={handleRequestLocationPermission}
                   disabled={isSending || !text.trim()}
                   className={`flex items-center justify-center 
                   w-10 h-10 rounded-full 
