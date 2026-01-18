@@ -50,7 +50,6 @@ function GeneralChat() {
 
   //handle sending new messages
   function handleSend(location) {
-    setIsSending(true);
     if (!text.trim()) return;
 
     socket.emit("sendMessage", {
@@ -70,6 +69,7 @@ function GeneralChat() {
       );
     }
 
+    setIsSending(true);
     navigator.geolocation.getCurrentPosition(
       async (position) => {
         const { latitude, longitude } = position.coords;
@@ -88,6 +88,7 @@ function GeneralChat() {
         );
 
         setText("");
+        setIsSending(false);
         return alert("Location permission must be allowed to send a message.");
       },
       {
