@@ -136,7 +136,11 @@ function Weather() {
           />
         )}
 
-        <div className="z-10 flex flex-row w-full backdrop-brightness-80 backdrop-blur-xs rounded-3xl text-white/50 px-5 py-5 md:px-20">
+        <div
+          className={`${
+            time.getHours() >= 18 || time.getHours() < 6 ? "saturate-0" : ""
+          } z-10 flex flex-row w-full backdrop-brightness-80 backdrop-blur-xs rounded-3xl text-white/50 px-5 py-5 md:px-20`}
+        >
           {/* Left Side */}
           <div className="flex flex-col gap-2 w-1/2 justify-between text-left">
             <div>
