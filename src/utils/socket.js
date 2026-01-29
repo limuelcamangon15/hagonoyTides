@@ -1,9 +1,13 @@
 import { io } from "socket.io-client";
 
-export const socket = io("https://hagonoytides-backend-1.onrender.com", {
-  autoConnect: false,
-  withCredentials: true,
-  reconnection: true,
-  reconnectionAttempts: Infinity,
-  reconnectionDelay: 1000,
-});
+export const socket = io(
+  //"https://hagonoytides-backend-1.onrender.com"
+  "https://hagonoytides-backend-production.up.railway.app",
+  {
+    autoConnect: false,
+    withCredentials: true,
+    reconnection: true,
+    reconnectionAttempts: Infinity,
+    reconnectionDelay: 1000,
+  }
+);
