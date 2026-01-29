@@ -14,7 +14,7 @@ function Home() {
   const [totalHighTides, setTotalHighTides] = useState(0);
   const [totalLowTides, setTotalLowTides] = useState(0);
 
-  useEffect(() => {
+  /*useEffect(() => {
     fetch("https://bahagonoyapi.web.app/hagonoyTides.json")
       .then((res) => res.json())
       .then((data) => {
@@ -41,7 +41,7 @@ function Home() {
         setTotalHighTides(highCount);
         setTotalLowTides(lowCount);
       });
-  }, []);
+  }, []);*/
 
   function isTodayDecember() {
     const monthToday = new Date().getMonth() + 1;
