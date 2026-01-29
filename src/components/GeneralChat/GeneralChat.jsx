@@ -19,7 +19,8 @@ function GeneralChat() {
   async function handleFetchMessages() {
     try {
       const res = await fetch(
-        "https://hagonoytides-backend-1.onrender.com/chats/messages"
+        // "https://hagonoytides-backend-1.onrender.com/chats/messages"
+        "https://hagonoytides-backend-production.up.railway.app/chats/messages"
       );
       const data = await res.json();
 
@@ -34,7 +35,8 @@ function GeneralChat() {
   async function handleFetchDecodeCoordinates(lat, lon) {
     try {
       const res = await fetch(
-        `https://hagonoytides-backend-1.onrender.com/chats/senderLocation?lat=${lat}&lon=${lon}`
+        // `https://hagonoytides-backend-1.onrender.com/chats/senderLocation?lat=${lat}&lon=${lon}`
+        `https://hagonoytides-backend-production.up.railway.app/chats/senderLocation?lat=${lat}&lon=${lon}`
       );
 
       const data = await res.json();

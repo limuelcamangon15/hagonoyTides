@@ -49,7 +49,8 @@ function TideContainer() {
 
     try {
       const res = await fetch(
-        "https://hagonoytides-backend-1.onrender.com/tide/get/byYear?year=2026"
+        //"https://hagonoytides-backend-1.onrender.com/tide/get/byYear?year=2026"
+        "https://hagonoytides-backend-production.up.railway.app/tide/get/byYear?year=2026"
       );
 
       const data = await res.json();

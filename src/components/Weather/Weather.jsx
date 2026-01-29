@@ -52,7 +52,8 @@ function Weather() {
   async function fetchWeather() {
     try {
       const res = await fetch(
-        "https://hagonoytides-backend-1.onrender.com/weather?city=Hagonoy"
+        //"https://hagonoytides-backend-1.onrender.com/weather?city=Hagonoy"
+        "https://hagonoytides-backend-production.up.railway.app/weather?city=Hagonoy"
       );
 
       const data = await res.json();
