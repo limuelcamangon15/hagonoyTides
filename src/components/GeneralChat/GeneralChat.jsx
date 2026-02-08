@@ -143,7 +143,7 @@ function GeneralChat() {
         conditions.
       </p>
       <div className="flex flex-col self-center max-h-[400px] w-[96%] gap-3 px-3 md:px-10 lg:px-30 py-5 justify-start items-center bg-white/10 rounded-3xl backdrop-blur-2xl custom-inset-shadow">
-        {isConnecting ? (
+        {true ? (
           <>
             <MessageSkeleton
               senderLocationWidth="w-30"
