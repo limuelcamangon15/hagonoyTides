@@ -31,11 +31,11 @@ function Tide({ tide: { date, day, isoDate, tides }, dateIndex }) {
         className={`relative overflow-hidden flex flex-col min-w-[50%] h-full 
         ${
           isToday(dateIndex)
-            ? "border-white"
+            ? "border-white z-10 scale-115"
             : "bg-[#D9D9D9]/30 border-white/30"
         }
         ${isDatePast(dateIndex) && "opacity-50"}
-         border rounded-2xl custom-inner-shadow`}
+         border rounded-2xl transition-all duration-300 custom-inner-shadow`}
       >
         {isToday(dateIndex) &&
           (tides.some((t) => t.tideLevel >= 3.0) ? (

@@ -154,7 +154,7 @@ function TideContainer() {
             </div>
           </>
         ) : (
-          <div className="flex flex-row max-w-full h-full gap-5 px-5 overflow-auto overflow-y-hidden">
+          <div className="flex flex-row max-w-full h-full gap-5 px-5 py-6 overflow-auto overflow-y-hidden">
             <div className="flex flex-row w-full gap-5">
               {tides.map((tide, key) => (
                 <div
