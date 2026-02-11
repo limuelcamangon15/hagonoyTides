@@ -31,7 +31,7 @@ function Tide({ tide: { date, day, isoDate, tides }, dateIndex }) {
         className={`relative overflow-hidden flex flex-col min-w-[50%] h-full 
         ${
           isToday(dateIndex)
-            ? "border-white z-10 scale-115"
+            ? "border-white"
             : "bg-[#D9D9D9]/30 border-white/30"
         }
         ${isDatePast(dateIndex) && "opacity-50"}
