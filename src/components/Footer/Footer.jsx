@@ -8,8 +8,10 @@ function Footer() {
 
         <p className="text-xs lg:md text-white/70 text-center">
           Developed By{" "}
-          <span className=" text-green-700 font-semibold">
-            Lims {new Date().getFullYear()}
+          <span className=" text-green-600 font-bold">
+            <a href="https://limuelcamangon.vercel.app/" target="_blank">
+              Lim
+            </a>
           </span>
         </p>
       </div>
