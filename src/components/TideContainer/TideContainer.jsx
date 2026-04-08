@@ -2,10 +2,15 @@ import { useEffect, useRef, useState } from "react";
 import Tide from "../Tide/Tide";
 import "./tide-container.css";
 import "../../index.css";
+import localforage from "localforage";
 import Skeleton from "../ui/Skeleton";
 import TideContainerSkeleton from "./TideContainerSkeleton";
 
 function TideContainer() {
+  const storage = localforage.createInstance({
+    name: "hagonoytidesCacheStorage",
+    storeName: "yearlyAPIResponse",
+  });
   const [data, setData] = useState({});
   const [dateIndex, setDateIndex] = useState(new Date().getMonth());
   const [tides, setTides] = useState([]);
@@ -43,6 +48,25 @@ function TideContainer() {
     { month: "Nov", monthValue: 10 },
     { month: "Dec", monthValue: 11 },
   ];
+
+  async function cacheData(key, value) {
+    try {
+      await storage.setItem(key, value);
+    } catch (error) {
+      console.log("Error saving data to the localforage", error);
+    }
+  }
+
+  async function getCachedData(key) {
+    const cachedData = await storage.getItem(key);
+
+    if (cachedData) {
+      console.log("Data loaded from cache");
+      return cacheData;
+    }
+
+    return null;
+  }
 
   async function fetchTides() {
     setIsLoading(true);
