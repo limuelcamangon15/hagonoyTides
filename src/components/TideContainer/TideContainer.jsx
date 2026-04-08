@@ -58,14 +58,18 @@ function TideContainer() {
   }
 
   async function getCachedData(key) {
-    const cachedData = await storage.getItem(key);
+    try {
+      const cachedData = await storage.getItem(key);
 
-    if (cachedData) {
-      console.log("Data loaded from cache");
-      return cacheData;
+      if (cachedData) {
+        console.log("Data loaded from cache");
+        return cacheData;
+      }
+
+      return null;
+    } catch (error) {
+      console.log("Error loading data to the localforage", error);
     }
-
-    return null;
   }
 
   async function fetchTides() {
