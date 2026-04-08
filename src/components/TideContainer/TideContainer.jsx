@@ -59,11 +59,11 @@ function TideContainer() {
 
   async function getCachedData(key) {
     try {
-      const cachedData = await storage.getItem(key);
+      const cache = await storage.getItem(key);
 
-      if (cachedData) {
+      if (cache) {
         console.log("Data loaded from cache");
-        return cacheData;
+        return cache;
       }
 
       return null;
@@ -76,12 +76,22 @@ function TideContainer() {
     setIsLoading(true);
 
     try {
+      const cache = await getCachedData("fullAPIResponse");
+
+      if (cache) {
+        setData(cache);
+        setIsLoading(false);
+        return;
+      }
+
       const res = await fetch(
         "https://hagonoytides-backend-1.onrender.com/tide/get/byYear?year=2026"
         //"https://hagonoytides-backend-production.up.railway.app/tide/get/byYear?year=2026"
       );
 
       const data = await res.json();
+
+      await cacheData("fullAPIResponse", data);
 
       console.log(
         data.monthlyTides[dateIndex].month + " TODAY IS: " + months[monthToday]
