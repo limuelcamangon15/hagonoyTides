@@ -136,18 +136,12 @@ function TideContainer() {
 
       {isLoading ? (
         <div className="flex flex-row flex-wrap items-center justify-center w-full gap-1 md:gap-3">
-          <div className="animate-pulse bg-gray-500/80 rounded-md w-6 h-6"></div>
-          <div className="animate-pulse bg-gray-500/80 rounded-md w-6 h-6"></div>
-          <div className="animate-pulse bg-gray-500/80 rounded-md w-6 h-6"></div>
-          <div className="animate-pulse bg-gray-500/80 rounded-md w-6 h-6"></div>
-          <div className="animate-pulse bg-gray-500/80 rounded-md w-6 h-6"></div>
-          <div className="animate-pulse bg-gray-500/80 rounded-md w-6 h-6"></div>
-          <div className="animate-pulse bg-gray-500/80 rounded-md w-6 h-6"></div>
-          <div className="animate-pulse bg-gray-500/80 rounded-md w-6 h-6"></div>
-          <div className="animate-pulse bg-gray-500/80 rounded-md w-6 h-6"></div>
-          <div className="animate-pulse bg-gray-500/80 rounded-md w-6 h-6"></div>
-          <div className="animate-pulse bg-gray-500/80 rounded-md w-6 h-6"></div>
-          <div className="animate-pulse bg-gray-500/80 rounded-md w-6 h-6"></div>
+          {monthButtonData.map((_, key) => (
+            <div
+              key={key}
+              className="animate-pulse bg-white/10 backdrop-blur-3xl border border-white/20 rounded-md w-6 h-6 shadow-2xl transition-all hover:scale-110 hover:shadow-3xl"
+            ></div>
+          ))}
         </div>
       ) : (
         <div className="flex flex-row flex-wrap items-center justify-center w-full gap-1 md:gap-3">
@@ -157,7 +151,9 @@ function TideContainer() {
               className={`cursor-pointer border month-btn-shadow hover:border-white/50 ${
                 dateIndex == monthData.monthValue
                   ? `bg-[#0E2DA6]/30 border-white text-white font-semibold month-btn-shadow-active`
-                  : `bg-white/30 border-transparent text-white/70 font-normal`
+                  : dateIndex > monthData.monthValue
+                  ? `bg-white/30 border-transparent text-white/70 opacity-50 font-light`
+                  : `bg-white/30 border-transparent text-white/70 font-light`
               } p-0.5 rounded-md transition duration-500`}
               onClick={() => setDateIndex(monthData.monthValue)}
             >
