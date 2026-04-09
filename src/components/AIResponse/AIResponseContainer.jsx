@@ -16,7 +16,8 @@ function AIResponseContainer({ content }) {
       </div>
 
       <div
-        className="
+        className={`
+          ${!content && "animate-pulse"}
           rounded-2xl
           rounded-tl-none
           bg-linear-to-tr
@@ -29,9 +30,20 @@ function AIResponseContainer({ content }) {
           text-sm
           py-2
           px-3
-        "
+        `}
       >
-        {content}
+        {content ? (
+          content
+        ) : (
+          <div className="flex items-center w-full justify-center space-x-2">
+            <span className="animate-pulse text-white/80">
+              Hey wait a minute, Im analyzing tides for today
+            </span>
+            <span className="w-2 h-2 bg-white/50 rounded-full animate-bounce-delay"></span>
+            <span className="w-2 h-2 bg-white/50 rounded-full animate-bounce-delay animation-delay-150"></span>
+            <span className="w-2 h-2 bg-white/50 rounded-full animate-bounce-delay animation-delay-300"></span>
+          </div>
+        )}
       </div>
     </div>
   );
