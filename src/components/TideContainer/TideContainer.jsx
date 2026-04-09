@@ -77,6 +77,17 @@ function TideContainer() {
     }
   }
 
+  function mapAndFormatTodaysTides(tideData) {
+    return tideData.monthlyTides[dateIndex].dailyTides[today - 1].tides
+      .map(
+        (t) =>
+          `${convertTo12Hour(t.time)} - ${t.type}  (${t.tideLevel.toFixed(
+            1
+          )} m)}`
+      )
+      .join(", ");
+  }
+
   async function fetchTides() {
     setIsLoading(true);
 
@@ -85,17 +96,9 @@ function TideContainer() {
 
       if (cache) {
         const monthToday = cache.monthlyTides[dateIndex].month;
-        const tidesTodayMapped = cache.monthlyTides[dateIndex].dailyTides[
-          today - 1
-        ].tides
-          .map(
-            (t) =>
-              `${convertTo12Hour(t.time)} - ${t.type}  (${t.tideLevel.toFixed(
-                1
-              )} m)}`
-          )
-          .join(", ");
+        const tidesTodayMapped = mapAndFormatTodaysTides(cache);
 
+        //set all cached data
         setData(cache);
         setAiResponse(callAI(monthToday, today, tidesTodayMapped));
 
@@ -121,9 +124,16 @@ function TideContainer() {
       console.log(data.monthlyTides[dateIndex].dailyTides);
 
       console.log(dateIndex);
-      setTides(data.monthlyTides[dateIndex].dailyTides);
-      setData(data);
 
+      //set all for non-cached
+      const monthTodayNotCached = data.monthlyTides[dateIndex].month;
+      const tidesTodayMappedNotCached = mapAndFormatTodaysTides(data);
+
+      setData(data);
+      setAiResponse(
+        callAI(monthTodayNotCached, today, tidesTodayMappedNotCached)
+      );
+      setTides(data.monthlyTides[dateIndex].dailyTides);
       setIsLoading(false);
     } catch (error) {
       console.log("Error Fetching Tide Data: ", error);
