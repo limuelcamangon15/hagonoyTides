@@ -2,9 +2,11 @@ import { useEffect, useRef, useState } from "react";
 import Tide from "../Tide/Tide";
 import "./tide-container.css";
 import "../../index.css";
+import { callAI } from "../../utils/hagonoytidesAI";
 import localforage from "localforage";
 import Skeleton from "../ui/Skeleton";
 import TideContainerSkeleton from "./TideContainerSkeleton";
+import { convertTo12Hour } from "../../utils/timeFormatter";
 
 function TideContainer() {
   const storage = localforage.createInstance({
@@ -79,9 +81,25 @@ function TideContainer() {
       const cache = await getCachedData("fullAPIResponse");
 
       if (cache) {
+        const monthToday = cache.monthlyTides[dateIndex].month;
+        const tidesTodayMapped = cache.monthlyTides[dateIndex].dailyTides[
+          today - 1
+        ].tides
+          .map(
+            (t) =>
+              `${convertTo12Hour(t.time)} - ${t.type}  (${t.tideLevel.toFixed(
+                1
+              )} m)}`
+          )
+          .join(", ");
+
         setData(cache);
+
+        callAI(monthToday, today, tidesTodayMapped);
+
         setTides(cache.monthlyTides[dateIndex].dailyTides);
         setIsLoading(false);
+
         return;
       }
 

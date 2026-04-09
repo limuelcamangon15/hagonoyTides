@@ -1,19 +1,11 @@
 import "./tide.css";
+import { convertTo12Hour } from "../../utils/timeFormatter";
 import AuroraBackground from "../ui/AuroraBackground";
 import TideDetailsContainer from "../TideDetailsContainer/TideDetailsContainer";
 
 function Tide({ tide: { date, day, isoDate, tides }, dateIndex }) {
   const dateToday = new Date().getDate();
   const monthToday = new Date().getMonth();
-
-  function convertTo12Hour(time24) {
-    let [hour, minute] = time24.split(":").map(Number);
-    const ampm = hour >= 12 ? "PM" : "AM";
-
-    hour = hour % 12 || 12;
-
-    return `${hour}:${minute.toString().padStart(2, "0")} ${ampm}`;
-  }
 
   function isToday(tideDateIndex) {
     return dateToday == date && monthToday == tideDateIndex;
@@ -53,6 +45,7 @@ function Tide({ tide: { date, day, isoDate, tides }, dateIndex }) {
               speed={3}
             />
           ))}
+
         <div className="flex justify-between items-center w-full px-2 absolute top-1 ">
           <h1 className="text-white font-semibold text-sm">{day}</h1>
           <h1 className="text-white font-semibold text-sm">{date}</h1>
