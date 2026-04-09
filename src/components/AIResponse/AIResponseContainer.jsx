@@ -3,10 +3,10 @@ import { BotIcon } from "lucide-react";
 function AIResponseContainer({ content }) {
   return (
     <div className="flex flex-col gap-1 m-3">
-      <div className="flex items-center gap-2 font-semibold">
+      <div className="flex items-center gap-2">
         <div className="flex gap-1 items-center">
           <BotIcon size={25} className="text-white" />
-          <p className="text-md text-white">Tidy</p>
+          <p className="text-md text-white font-bold">Tidy</p>
         </div>
 
         <div className="flex gap-1 items-center text-white/80 text-xs">
@@ -17,7 +17,7 @@ function AIResponseContainer({ content }) {
 
       <div
         className="
-          rounded-3xl
+          rounded-2xl
           rounded-tl-none
           bg-linear-to-tr
         from-green-400/20
@@ -27,7 +27,8 @@ function AIResponseContainer({ content }) {
           border border-white/10
           text-white/90
           text-sm
-          p-4
+          py-2
+          px-3
         "
       >
         {content}

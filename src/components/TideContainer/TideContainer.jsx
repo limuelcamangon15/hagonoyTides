@@ -8,6 +8,7 @@ import Skeleton from "../ui/Skeleton";
 import TideContainerSkeleton from "./TideContainerSkeleton";
 import { convertTo12Hour } from "../../utils/timeFormatter";
 import AIResponseContainer from "../AIResponse/AIResponseContainer";
+import AiIntroNotification from "../AIResponse/AIIntroNotification";
 
 function TideContainer() {
   const storage = localforage.createInstance({
@@ -151,6 +152,9 @@ function TideContainer() {
 
   return (
     <>
+      {/* Tidy HagonoyTides AI  */}
+      <AiIntroNotification />
+
       {/* Months Container Button */}
 
       {isLoading ? (
@@ -170,8 +174,6 @@ function TideContainer() {
               className={`cursor-pointer border month-btn-shadow hover:border-white/50 ${
                 dateIndex == monthData.monthValue
                   ? `bg-[#0E2DA6]/30 border-white text-white font-semibold month-btn-shadow-active`
-                  : dateIndex > monthData.monthValue
-                  ? `bg-white/30 border-transparent text-white/70 opacity-50 font-light`
                   : `bg-white/30 border-transparent text-white/70 font-light`
               } p-0.5 rounded-md transition duration-500`}
               onClick={() => setDateIndex(monthData.monthValue)}
@@ -181,8 +183,6 @@ function TideContainer() {
           ))}
         </div>
       )}
-
-      <AIResponseContainer content={aiResponse} />
 
       {/* Monthly Tides Container */}
       <div className="flex flex-col gap-5 sm:h-60 md:h-1/4">
@@ -224,6 +224,8 @@ function TideContainer() {
             </div>
           </div>
         )}
+
+        <AIResponseContainer content={aiResponse} />
       </div>
     </>
   );
