@@ -1,0 +1,39 @@
+import { BotIcon } from "lucide-react";
+
+function AIResponseContainer({ content }) {
+  return (
+    <div className="flex flex-col gap-1 m-3">
+      <div className="flex items-center gap-2 font-semibold">
+        <div className="flex gap-1 items-center">
+          <BotIcon size={25} className="text-white" />
+          <p className="text-md text-white">Tidy</p>
+        </div>
+
+        <div className="flex gap-1 items-center text-white/80 text-xs">
+          <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+          Online
+        </div>
+      </div>
+
+      <div
+        className="
+          rounded-3xl
+          rounded-tl-none
+          bg-linear-to-tr
+        from-green-400/20
+        via-green-400/40
+        to-green-400/10
+          backdrop-blur-md
+          border border-white/10
+          text-white/90
+          text-sm
+          p-4
+        "
+      >
+        {content}
+      </div>
+    </div>
+  );
+}
+
+export default AIResponseContainer;

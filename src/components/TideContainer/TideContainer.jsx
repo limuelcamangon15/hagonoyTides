@@ -7,6 +7,7 @@ import localforage from "localforage";
 import Skeleton from "../ui/Skeleton";
 import TideContainerSkeleton from "./TideContainerSkeleton";
 import { convertTo12Hour } from "../../utils/timeFormatter";
+import AIResponseContainer from "../AIResponse/AIResponseContainer";
 
 function TideContainer() {
   const storage = localforage.createInstance({
@@ -16,6 +17,7 @@ function TideContainer() {
   const [data, setData] = useState({});
   const [dateIndex, setDateIndex] = useState(new Date().getMonth());
   const [tides, setTides] = useState([]);
+  const [aiResponse, setAiResponse] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   const today = new Date().getDate();
@@ -94,8 +96,7 @@ function TideContainer() {
           .join(", ");
 
         setData(cache);
-
-        callAI(monthToday, today, tidesTodayMapped);
+        setAiResponse(callAI(monthToday, today, tidesTodayMapped));
 
         setTides(cache.monthlyTides[dateIndex].dailyTides);
         setIsLoading(false);
@@ -180,6 +181,8 @@ function TideContainer() {
           ))}
         </div>
       )}
+
+      <AIResponseContainer content={aiResponse} />
 
       {/* Monthly Tides Container */}
       <div className="flex flex-col gap-5 sm:h-60 md:h-1/4">
