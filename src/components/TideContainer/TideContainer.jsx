@@ -80,6 +80,7 @@ function TideContainer() {
 
       if (cache) {
         setData(cache);
+        setTides(cache.monthlyTides[dateIndex].dailyTides);
         setIsLoading(false);
         return;
       }
