@@ -83,7 +83,7 @@ function TideContainer() {
         (t) =>
           `${convertTo12Hour(t.time)} - ${t.type}  (${t.tideLevel.toFixed(
             1
-          )} m)}`
+          )} ft)}`
       )
       .join(", ");
   }
