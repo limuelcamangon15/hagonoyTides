@@ -183,8 +183,8 @@ function Weather() {
               ) : (
                 <p className="text-white">
                   {weather?.description
-                    ? weather.description.charAt(0).toUpperCase() +
-                      weather.description.slice(1)
+                    ? weather.description?.charAt(0).toUpperCase() +
+                      weather.description?.slice(1)
                     : "-"}
                 </p>
               )}
