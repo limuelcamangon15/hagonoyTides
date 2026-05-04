@@ -9,7 +9,7 @@ export default defineConfig({
     VitePWA({
       registerType: "autoUpdate",
       workbox: {
-        globPatterns: ["**/*.{js,css,html,ico,png,svg}"], // Caches your UI
+        globPatterns: ["**/*.{js,css,html,ico,png,svg}"],
         runtimeCaching: [
           {
             urlPattern: ({ url }) => url.pathname.startsWith("/api/"), // Caches your API data
@@ -25,7 +25,7 @@ export default defineConfig({
         display: "standalone", // This makes it look like a real app
         name: "HagonoyTides",
         short_name: "HagonoyTides",
-        theme_color: "#000000",
+        theme_color: "#430167",
         icons: [
           {
             src: "192x192-hagonoytides-icon.png",
