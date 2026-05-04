@@ -170,7 +170,7 @@ function Weather() {
               ) : (
                 <div className="flex">
                   <p className="bg-linear-to-t from-white to-white/50 bg-clip-text text-transparent w-fit text-5xl font-semibold">
-                    {temperature.temp.toFixed(0)}
+                    {temperature?.temp?.toFixed(0) ?? "-"}
                   </p>
 
                   <p className="inline text-white text-[1.5rem] font-semibold">
