@@ -17,6 +17,10 @@ function GeneralChat() {
 
   //handle fetching all previous messages
   async function handleFetchMessages() {
+    if (!navigator.onLine) {
+      setIsConnecting(true);
+      return console.log("NO FETCH MESSAGE BCS OFFLINE HEHE");
+    }
     try {
       const res = await fetch(
         "https://hagonoytides-backend-1.onrender.com/chats/messages"
@@ -113,18 +117,46 @@ function GeneralChat() {
 
   //real-time messaging using WebSockets
   useEffect(() => {
-    socket.connect();
+    function handleOnline() {
+      console.log("Back online");
+      setIsConnecting(true); // show skeleton while reconnecting
+      socket.connect();
+    }
 
-    socket.on("connect", () => {
-      console.log("Connected:", socket.id);
-      setIsConnecting(false);
-    });
+    function handleOffline() {
+      console.log("Went offline");
+      setIsConnecting(true); // force loading state
+      socket.disconnect();
+    }
 
-    socket.on("receivedMessage", (data) => {
-      setMessages((prev) => [...prev, data]);
-    });
+    // initial state check
+    if (!navigator.onLine) {
+      setIsConnecting(true);
+      console.log("Offline mode - no chats for now");
+    }
+
+    window.addEventListener("online", handleOnline);
+    window.addEventListener("offline", handleOffline);
+
+    // connect socket if online
+    if (navigator.onLine) {
+      socket.connect();
+
+      socket.on("connect", () => {
+        console.log("Connected:", socket.id);
+        setIsConnecting(false);
+      });
+
+      socket.on("receivedMessage", (data) => {
+        setMessages((prev) => [...prev, data]);
+      });
+    }
 
     return () => {
+      window.removeEventListener("online", handleOnline);
+      window.removeEventListener("offline", handleOffline);
+
+      socket.off("connect");
       socket.off("receivedMessage");
       socket.disconnect();
     };

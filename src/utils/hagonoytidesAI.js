@@ -13,11 +13,20 @@ export async function callAI(monthToday, dateToday, tidesTodayMapped) {
 
   const prompt = `today is ${monthToday} ${dateToday} in ${location}, tides today: ${tidesTodayMapped} , recommend or give reminders based on these data (fishing is good when hightide), create just a concise and short response 300 characters only do not remention things i said to you) so the reader can easily grasp the content and also always compare time now ${timeNow} from tides time. to not mention beach`;
 
-  console.log("PROMPT:::       ", prompt);
-  const response = await client.responses.create({
-    model: "openai/gpt-oss-20b",
-    input: prompt,
-  });
+  if (!navigator.onLine) {
+    return "OFFLINEEEEEEEEEEE";
+  }
 
-  return response.output_text;
+  try {
+    const response = await client.responses.create({
+      model: "openai/gpt-oss-20b",
+      input: prompt,
+    });
+
+    return response.output_text;
+  } catch (err) {
+    console.warn("AI failed, using fallback:", err);
+
+    return "OFFLINEEEEEEEEEEE nga ni";
+  }
 }

@@ -50,6 +50,12 @@ function Weather() {
   }, []);
 
   async function fetchWeather() {
+    if (!navigator.onLine) {
+      setFetchingData(true);
+      console.log("Offline mode no weather");
+      return;
+    }
+
     try {
       const res = await fetch(
         "https://hagonoytides-backend-1.onrender.com/weather?city=Hagonoy"
@@ -59,27 +65,34 @@ function Weather() {
       const data = await res.json();
       console.log("fetched data::::", data);
 
-      console.log("setWeather", data.weather[0]);
-      setWeather(data.weather[0]);
-      setWeatherThemeAndIcon(data.weather[0].main);
+      const weatherData = data?.weather?.[0];
+      setWeather(weatherData);
+      setWeatherThemeAndIcon(weatherData?.main);
 
-      console.log("setLocation", data.name);
-      setLocation(data.name);
+      setLocation(data?.name ?? "-");
 
-      console.log("setTemperature", data.main);
-      setTemperature(data.main);
+      setTemperature(data?.main);
 
-      console.log("setWind", data.wind);
-      setWind(data.wind);
+      setWind(data?.wind);
 
       setFetchingData(false);
     } catch (error) {
-      console.log(error);
+      console.log("PWA NetworkOnly trigger: ", error);
+
+      setWeather({ main: "Offline", description: "No internet connection" });
+      setWeatherThemeAndIcon("Offline");
+      setLocation("Hagonoy (Offline)");
+
+      setTemperature({ temp: "--", humidity: "--" });
+      setWind({ speed: "--" });
+    } finally {
       setFetchingData(false);
     }
   }
 
   function setWeatherThemeAndIcon(weatherType) {
+    if (!weatherType || weatherType === "Offline") return;
+
     if (weatherType === "Clear") {
       // sunny
       setWeatherUIAssets({
@@ -131,7 +144,7 @@ function Weather() {
 
         {!fetchingData && (
           <img
-            src={weatherUIAssets.background}
+            src={weatherUIAssets?.background || ""}
             alt="weather based background"
             className="absolute top-0 left-0 w-full h-full z-0"
           />
@@ -170,7 +183,7 @@ function Weather() {
               ) : (
                 <div className="flex">
                   <p className="bg-linear-to-t from-white to-white/50 bg-clip-text text-transparent w-fit text-5xl font-semibold">
-                    {temperature.temp.toFixed(0)}
+                    {temperature?.temp?.toFixed(0) ?? "-"}
                   </p>
 
                   <p className="inline text-white text-[1.5rem] font-semibold">
@@ -183,8 +196,10 @@ function Weather() {
                 <Skeleton className="w-30 md:w-40 h-5 mt-1 rounded-md" />
               ) : (
                 <p className="text-white">
-                  {weather.description.charAt(0).toUpperCase() +
-                    weather.description.slice(1)}
+                  {weather?.description
+                    ? weather.description?.charAt(0).toUpperCase() +
+                      weather.description?.slice(1)
+                    : "-"}
                 </p>
               )}
             </div>
@@ -211,7 +226,7 @@ function Weather() {
                 <Skeleton className="w-30 h-22 mt-1 rounded-md" />
               ) : (
                 <img
-                  src={weatherUIAssets.icon}
+                  src={weatherUIAssets?.icon || ""}
                   alt="weather image icon"
                   className="w-25 md:w-28"
                 />
