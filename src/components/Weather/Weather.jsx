@@ -71,13 +71,21 @@ function Weather() {
 
       setFetchingData(false);
     } catch (error) {
-      console.log(error);
+      console.log("PWA NetworkOnly trigger: ", error);
+
+      setWeather({ main: "Offline", description: "No internet connection" });
+      setWeatherThemeAndIcon("Offline");
+      setLocation("Hagonoy (Offline)");
+
+      setTemperature({ temp: "--", humidity: "--" });
+      setWind({ speed: "--" });
+    } finally {
       setFetchingData(false);
     }
   }
 
   function setWeatherThemeAndIcon(weatherType) {
-    if (!weatherType) return;
+    if (!weatherType || weatherType === "Offline") return;
 
     if (weatherType === "Clear") {
       // sunny
