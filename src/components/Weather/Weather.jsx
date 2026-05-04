@@ -50,6 +50,12 @@ function Weather() {
   }, []);
 
   async function fetchWeather() {
+    if (!navigator.onLine) {
+      setFetchingData(true);
+      console.log("Offline mode no weather");
+      return;
+    }
+
     try {
       const res = await fetch(
         "https://hagonoytides-backend-1.onrender.com/weather?city=Hagonoy"

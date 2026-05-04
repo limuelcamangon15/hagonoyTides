@@ -113,6 +113,11 @@ function GeneralChat() {
 
   //real-time messaging using WebSockets
   useEffect(() => {
+    if (!navigator.onLine) {
+      setIsConnecting(true);
+      return console.log("Offline mode no chats for now");
+    }
+
     socket.connect();
 
     socket.on("connect", () => {
