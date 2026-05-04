@@ -10,6 +10,7 @@ export default defineConfig({
       registerType: "autoUpdate",
       workbox: {
         globPatterns: ["**/*.{js,css,html,ico,png,svg}"],
+        navigateFallback: "index.html",
         runtimeCaching: [
           {
             urlPattern: ({ url }) => url.pathname.startsWith("/api/"), // Caches your API data
