@@ -13,11 +13,20 @@ export default defineConfig({
         navigateFallback: "index.html",
         runtimeCaching: [
           {
-            urlPattern: ({ url }) => url.pathname.startsWith("/api/"), // Caches your API data
-            handler: "CacheFirst", // Matches your current preference
+            // 1. EXCLUDE WEATHER, CHATS, AND SOCKET.IO
+            urlPattern: ({ url }) =>
+              url.href.includes("/weather") ||
+              url.href.includes("/chats") ||
+              url.href.includes("socket.io"),
+            handler: "NetworkOnly",
+          },
+          {
+            // 2. FALLBACK FOR OTHER API CALLS
+            urlPattern: ({ url }) => url.pathname.startsWith("/api/"),
+            handler: "NetworkFirst",
             options: {
-              cacheName: "api-data",
-              expiration: { maxEntries: 50, maxAgeSeconds: 86400 }, // 24 hours
+              cacheName: "general-api-data",
+              expiration: { maxEntries: 30, maxAgeSeconds: 3600 },
             },
           },
         ],
