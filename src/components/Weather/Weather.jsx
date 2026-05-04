@@ -59,18 +59,15 @@ function Weather() {
       const data = await res.json();
       console.log("fetched data::::", data);
 
-      console.log("setWeather", data.weather[0]);
-      setWeather(data.weather[0]);
-      setWeatherThemeAndIcon(data.weather[0].main);
+      const weatherData = data?.weather?.[0];
+      setWeather(weatherData);
+      setWeatherThemeAndIcon(weatherData?.main);
 
-      console.log("setLocation", data.name);
-      setLocation(data.name);
+      setLocation(data?.name ?? "-");
 
-      console.log("setTemperature", data.main);
-      setTemperature(data.main);
+      setTemperature(data?.main);
 
-      console.log("setWind", data.wind);
-      setWind(data.wind);
+      setWind(data?.wind);
 
       setFetchingData(false);
     } catch (error) {
@@ -80,6 +77,8 @@ function Weather() {
   }
 
   function setWeatherThemeAndIcon(weatherType) {
+    if (!weatherType) return;
+
     if (weatherType === "Clear") {
       // sunny
       setWeatherUIAssets({
@@ -131,7 +130,7 @@ function Weather() {
 
         {!fetchingData && (
           <img
-            src={weatherUIAssets.background}
+            src={weatherUIAssets?.background || ""}
             alt="weather based background"
             className="absolute top-0 left-0 w-full h-full z-0"
           />
@@ -183,8 +182,10 @@ function Weather() {
                 <Skeleton className="w-30 md:w-40 h-5 mt-1 rounded-md" />
               ) : (
                 <p className="text-white">
-                  {weather.description.charAt(0).toUpperCase() +
-                    weather.description.slice(1)}
+                  {weather?.description
+                    ? weather.description.charAt(0).toUpperCase() +
+                      weather.description.slice(1)
+                    : "-"}
                 </p>
               )}
             </div>
@@ -211,7 +212,7 @@ function Weather() {
                 <Skeleton className="w-30 h-22 mt-1 rounded-md" />
               ) : (
                 <img
-                  src={weatherUIAssets.icon}
+                  src={weatherUIAssets?.icon || ""}
                   alt="weather image icon"
                   className="w-25 md:w-28"
                 />
