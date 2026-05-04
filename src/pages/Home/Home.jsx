@@ -8,11 +8,15 @@ import Weather from "../../components/Weather/Weather";
 import Snowfall from "react-snowfall";
 import { motion, AnimatePresence } from "framer-motion";
 import "../../index.css";
+import { sileo } from "sileo";
+import OfflineNotice from "../../components/ui/OfflineNotice";
 
 function Home() {
   const [monthlyTides, setMonthlyTides] = useState([]);
   const [totalHighTides, setTotalHighTides] = useState(0);
   const [totalLowTides, setTotalLowTides] = useState(0);
+
+  const [isOffline, setIsOffline] = useState(false);
 
   /*useEffect(() => {
     fetch("https://bahagonoyapi.web.app/hagonoyTides.json")
@@ -49,6 +53,25 @@ function Home() {
     return monthToday == 12;
   }
 
+  useEffect(() => {
+    if (!navigator.onLine) {
+      setIsOffline(true);
+
+      sileo.warning({
+        title: "You are currently offline.",
+        description: (
+          <div>
+            <p className="text-yellow-500/50! text-center font-medium!">
+              Offline mode is now enabled.
+            </p>
+          </div>
+        ),
+      });
+    } else {
+      setIsOffline(false);
+    }
+  }, []);
+
   return (
     <>
       <AnimatePresence mode="wait">
@@ -65,6 +88,8 @@ function Home() {
             className="flex flex-col w-full flex-1 gap-5 xl:px-70"
           >
             {/*<SummaryCard lowTides={totalLowTides} highTides={totalHighTides} />*/}
+
+            {isOffline && <OfflineNotice />}
 
             <Weather />
 
