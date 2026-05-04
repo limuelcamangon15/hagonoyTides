@@ -66,11 +66,11 @@ function Home() {
           >
             {/*<SummaryCard lowTides={totalLowTides} highTides={totalHighTides} />*/}
 
-            {/**<Weather />*/}
+            <Weather />
 
             <TideContainer />
 
-            {/** <GeneralChat />*/}
+            <GeneralChat />
           </motion.section>
           <Footer />
         </div>
