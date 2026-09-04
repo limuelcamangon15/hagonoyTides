@@ -2,15 +2,70 @@ import Skeleton from "../ui/Skeleton";
 
 function MessageSkeleton({ senderLocationWidth, messageWidth, dateWidth }) {
   return (
-    <div className="flex flex-col gap-1 px-5 py-2 rounded-2xl w-full bg-gray-500/30 animate-pulse border-white/10">
-      <div className="flex gap-3 ">
-        <div className="flex items-center justify-center bg-gray-500 min-w-8 min-h-8 rounded-full">
+    <div
+      className="
+        flex
+        w-full
+        flex-col
+        gap-1
+        rounded-[22px]
+        border
+        border-white/[0.08]
+        bg-white/[0.045]
+        px-4
+        py-3.5
+        shadow-[0_4px_20px_rgba(0,0,0,0.06)]
+        backdrop-blur-xl
+      "
+    >
+      {/* Sender skeleton */}
+      <div className="flex items-center gap-3">
+        <div
+          className="
+            flex
+            h-9
+            w-9
+            shrink-0
+            items-center
+            justify-center
+            rounded-full
+            border border-white/[0.08]
+            bg-white/[0.07]
+            animate-pulse
+          "
+        >
           <Skeleton />
         </div>
-        <Skeleton className={`${senderLocationWidth} h-3`} />
+
+        <Skeleton
+          className={`
+            ${senderLocationWidth}
+            h-3
+            rounded-full
+          `}
+        />
       </div>
-      <Skeleton className={`${messageWidth} h-5`} />
-      <Skeleton className={`${dateWidth} h-3 self-end`} />
+
+      {/* Message skeleton */}
+      <div className="mt-2">
+        <Skeleton
+          className={`
+            ${messageWidth}
+            h-4
+            rounded-full
+          `}
+        />
+      </div>
+
+      {/* Date skeleton */}
+      <Skeleton
+        className={`
+          ${dateWidth}
+          h-2.5
+          self-end
+          rounded-full
+        `}
+      />
     </div>
   );
 }
