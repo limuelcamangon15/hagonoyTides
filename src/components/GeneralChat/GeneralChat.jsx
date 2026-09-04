@@ -13,7 +13,7 @@ function GeneralChat() {
   const [isSending, setIsSending] = useState(false);
   const [isConnecting, setIsConnecting] = useState(true);
 
-  const messagesEndRef = useRef(null);
+  const scrollContainerRef = useRef(null);
 
   //handle fetching all previous messages
   async function handleFetchMessages() {
@@ -105,9 +105,12 @@ function GeneralChat() {
     );
   }
 
-  //auto scroll to the latest message
+  // Automatically scrolls only the messages section cleanly
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollTop =
+        scrollContainerRef.current.scrollHeight;
+    }
   }, [messages]);
 
   //get all previous messages using REST
@@ -294,6 +297,7 @@ function GeneralChat() {
           <>
             {/* Messages */}
             <section
+              ref={scrollContainerRef}
               className="
                 relative
                 flex-1
@@ -356,8 +360,6 @@ function GeneralChat() {
                     </div>
                   ))
                 )}
-
-                <div ref={messagesEndRef} />
               </div>
             </section>
 
