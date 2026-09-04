@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import Skeleton from "../ui/Skeleton";
 
 import cloudyPNG from "../../assets/weather-png/cloudy.png";
@@ -127,7 +128,13 @@ function Weather() {
   }
 
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 0, y: 14, scale: 0.97 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      transition={{
+        duration: 0.4,
+        ease: [0.22, 1, 0.36, 1],
+      }}
       className={`${
         fetchingData && "animate-pulse bg-gray-500/30"
       } relative flex flex-row justify-between p-1 gap-5 mt-23 mx-auto rounded-4xl border border-yellow-500/30 backdrop-blur-2xl w-[95%] h-50 overflow-hidden`}
@@ -235,7 +242,7 @@ function Weather() {
           </div>
         </div>
       </>
-    </div>
+    </motion.div>
   );
 }
 

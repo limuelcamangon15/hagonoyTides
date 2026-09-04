@@ -9,7 +9,7 @@ import Skeleton from "../ui/Skeleton";
 import TideContainerSkeleton from "./TideContainerSkeleton";
 import { convertTo12Hour } from "../../utils/timeFormatter";
 import AIResponseContainer from "../AIResponse/AIResponseContainer";
-import AiIntroNotification from "../AIResponse/AiIntroNotification";
+import AIIntroNotification from "../AIResponse/AIIntroNotification";
 
 function TideContainer() {
   const storage = localforage.createInstance({
@@ -172,7 +172,7 @@ function TideContainer() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3, ease: "easeOut" }}
       >
-        <AiIntroNotification />
+        <AIIntroNotification />
       </motion.div>
 
       {/* Month Selector */}

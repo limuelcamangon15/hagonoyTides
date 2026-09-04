@@ -1,6 +1,16 @@
 import { NavLink } from "react-router";
 import { useEffect, useState } from "react";
-import { Home, Info, Mail, X, Menu, Waves, ChevronRight } from "lucide-react";
+import {
+  Home,
+  Info,
+  Mail,
+  X,
+  Menu,
+  Waves,
+  ChevronRight,
+  HelpCircle,
+  HandHeartIcon,
+} from "lucide-react";
 import logo from "../../assets/bahagonoy-icon-white.png";
 import "./nav-bar.css";
 import "../../index.css";
@@ -59,6 +69,11 @@ function Navbar() {
       name: "Contact",
       path: "/contact",
       icon: Mail,
+    },
+    {
+      name: "Support HagonoyTides",
+      path: "/limuelcamangon/buy-me-a-coffee",
+      icon: HandHeartIcon,
     },
   ];
 
@@ -229,22 +244,6 @@ function Navbar() {
                     />
 
                     <span>{item.name}</span>
-
-                    {isActive && (
-                      <span
-                        className="
-                          absolute
-                          bottom-0.5
-                          left-1/2
-                          h-0.5
-                          w-3
-                          -translate-x-1/2
-                          rounded-full
-                          bg-cyan-200
-                          shadow-[0_0_8px_rgba(165,243,252,0.7)]
-                        "
-                      />
-                    )}
                   </>
                 )}
               </NavLink>

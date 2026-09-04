@@ -34,7 +34,7 @@ export default function BuyMeACoffee() {
             <img
               src={supportHagonoyTides}
               alt="GCash QR Code to Support Hagonoy Tides"
-              className="h-64 w-64 max-w-full rounded-2xl object-cover sm:h-100 sm:w-90"
+              className="h-80 w-70 max-w-full rounded-2xl object-cover sm:h-100 sm:w-90"
             />
           </div>
 
@@ -107,15 +107,6 @@ export default function BuyMeACoffee() {
             </div>
           </div>
         </section>
-
-        {/* Back */}
-        <NavLink
-          to="/home"
-          className="mt-8 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-xs font-medium text-white/45 transition-all duration-200 hover:border-white/20 hover:bg-white/[0.07] hover:text-white/80"
-        >
-          <ArrowLeft className="h-3.5 w-3.5" />
-          Back to HagonoyTides
-        </NavLink>
 
         {/* Small footer label */}
         <p className="mt-8 text-[9px] uppercase tracking-[0.16em] text-white/20">

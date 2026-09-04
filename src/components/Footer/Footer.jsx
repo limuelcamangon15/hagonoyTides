@@ -47,6 +47,15 @@ function Footer() {
           >
             Contact
           </NavLink>
+
+          <span className="text-white/15">•</span>
+
+          <NavLink
+            to="/limuelcamangon/buy-me-a-coffee"
+            className="transition-colors hover:text-white/80"
+          >
+            Support the website
+          </NavLink>
         </nav>
       </div>
 
@@ -54,7 +63,7 @@ function Footer() {
       <div className="mx-auto max-w-2xl text-center">
         <p className="text-[10px] leading-5 text-white/30">
           HagonoyTides is fully designed and developed by a student with zero
-          funding — built with the goal of creating something useful for the
+          funding, built with the goal of creating something useful for the
           Hagonoy Bulacan community.
         </p>
       </div>
