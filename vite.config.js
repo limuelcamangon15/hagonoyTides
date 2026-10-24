@@ -35,6 +35,7 @@ export default defineConfig({
         display: "standalone", // This makes it look like a real app
         name: "HagonoyTides",
         short_name: "HagonoyTides",
+        background_color: "#050a16",
         theme_color: "#430167",
         icons: [
           {

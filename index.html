@@ -29,10 +29,6 @@
       }
     </script>
     <link rel="icon" type="image/svg+xml" href="/hagonoy-tides-logo.png" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-    />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>HagonoyTides</title>
     <meta
@@ -48,10 +44,652 @@
     <meta name="author" content="Limuel Camangon" />
 
     <link rel="canonical" href="https://hagonoytides.vercel.app/" />
+
+    <!-- ============================================================
+         App splash
+         Kept inline (no images, fonts, or network requests) so it
+         paints immediately and still works completely offline.
+         Only transform/opacity are animated for smooth 60fps.
+         ============================================================ -->
+    <style>
+      #app-splash {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        background:
+          radial-gradient(80% 55% at 50% -8%, rgba(34, 211, 238, 0.16), transparent 64%),
+          radial-gradient(60% 44% at 88% 30%, rgba(37, 99, 235, 0.1), transparent 72%),
+          linear-gradient(180deg, #061120 0%, #050a16 46%, #04101b 100%);
+        font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+          Helvetica, Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        animation: splash-dismiss 2.5s cubic-bezier(0.33, 0, 0.2, 1) forwards;
+        will-change: opacity;
+      }
+
+      .splash__defs {
+        position: absolute;
+        width: 0;
+        height: 0;
+        overflow: hidden;
+      }
+
+      .splash__glow {
+        position: absolute;
+        border-radius: 50%;
+        pointer-events: none;
+      }
+
+      .splash__glow--top {
+        top: -18%;
+        left: 50%;
+        width: min(90vw, 760px);
+        height: min(70vw, 560px);
+        transform: translateX(-50%);
+        background: radial-gradient(
+          ellipse at center,
+          rgba(34, 211, 238, 0.12),
+          transparent 66%
+        );
+      }
+
+      .splash__glow--side {
+        right: -18%;
+        bottom: 6%;
+        width: min(70vw, 640px);
+        height: min(50vw, 460px);
+        background: radial-gradient(
+          ellipse at center,
+          rgba(16, 185, 129, 0.08),
+          transparent 68%
+        );
+      }
+
+      .splash__content {
+        position: relative;
+        z-index: 10;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: -7vh;
+        padding: 0 24px;
+        text-align: center;
+        pointer-events: none;
+      }
+
+      .splash__mark-wrap {
+        position: relative;
+        display: grid;
+        place-items: center;
+        width: 96px;
+        height: 96px;
+      }
+
+      .splash__ring {
+        position: absolute;
+        width: 96px;
+        height: 96px;
+        border: 1px solid rgba(103, 232, 249, 0.35);
+        border-radius: 50%;
+        opacity: 0;
+        animation: splash-ripple 3s ease-out 0.25s infinite;
+        will-change: transform, opacity;
+      }
+
+      .splash__ring:nth-child(2) {
+        animation-delay: 1.75s;
+      }
+
+      .splash__mark {
+        position: relative;
+        display: grid;
+        place-items: center;
+        width: 88px;
+        height: 88px;
+        border: 1px solid rgba(165, 243, 252, 0.22);
+        border-radius: 26px;
+        background: linear-gradient(
+          145deg,
+          rgba(14, 116, 144, 0.34),
+          rgba(8, 47, 73, 0.3)
+        );
+        box-shadow:
+          0 20px 55px rgba(0, 0, 0, 0.42),
+          0 0 45px rgba(34, 211, 238, 0.1),
+          inset 0 1px 0 rgba(255, 255, 255, 0.14);
+        animation: splash-mark-in 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.08s both;
+      }
+
+      .splash__mark svg {
+        width: 48px;
+        height: 48px;
+      }
+
+      .splash__title {
+        margin: 24px 0 0;
+        color: #ffffff;
+        font-size: 30px;
+        font-weight: 650;
+        line-height: 1;
+        letter-spacing: -0.045em;
+        animation: splash-rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.22s both;
+      }
+
+      .splash__title span {
+        color: #a5f3fc;
+      }
+
+      .splash__tagline {
+        margin: 11px 0 0;
+        color: rgba(224, 242, 254, 0.42);
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        animation: splash-rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.34s both;
+      }
+
+      .splash__loader {
+        position: relative;
+        width: 112px;
+        height: 2px;
+        margin-top: 30px;
+        overflow: hidden;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.07);
+        animation: splash-fade-in 0.6s ease 0.4s both;
+      }
+
+      .splash__loader::after {
+        content: "";
+        display: block;
+        width: 100%;
+        height: 100%;
+        border-radius: inherit;
+        background: linear-gradient(
+          90deg,
+          rgba(34, 211, 238, 0.15),
+          #67e8f9 65%,
+          #ecfeff
+        );
+        box-shadow: 0 0 12px rgba(103, 232, 249, 0.55);
+        transform: scaleX(0);
+        transform-origin: left center;
+        animation: splash-progress 1.55s cubic-bezier(0.4, 0, 0.2, 1) 0.45s
+          forwards;
+      }
+
+      .splash__ocean {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 3;
+        height: 48vh;
+        height: 48dvh;
+        min-height: 250px;
+        max-height: 560px;
+        overflow: hidden;
+        pointer-events: none;
+      }
+
+      .splash__wave {
+        position: absolute;
+        left: 0;
+        display: flex;
+        width: 200%;
+        will-change: transform;
+        animation: splash-drift 22s linear infinite;
+      }
+
+      .splash__wave > svg {
+        display: block;
+        flex: none;
+        width: 50%;
+        height: 100%;
+      }
+
+      .splash__wave--far {
+        bottom: 15%;
+        height: 62%;
+        opacity: 0.75;
+        animation-duration: 26s;
+      }
+
+      .splash__wave--mid {
+        bottom: 7%;
+        height: 65%;
+        animation-duration: 18s;
+        animation-direction: reverse;
+      }
+
+      .splash__wave--near {
+        bottom: -2%;
+        height: 68%;
+        animation-duration: 13s;
+      }
+
+      .splash__bubbles {
+        position: absolute;
+        inset: 0;
+        z-index: 4;
+      }
+
+      .splash__bubble {
+        position: absolute;
+        bottom: 10%;
+        left: var(--x);
+        width: var(--size);
+        height: var(--size);
+        border-radius: 50%;
+        background: rgba(165, 243, 252, 0.3);
+        box-shadow: 0 0 8px rgba(103, 232, 249, 0.22);
+        opacity: 0;
+        animation: splash-bubble var(--duration) linear var(--delay) infinite;
+        will-change: transform, opacity;
+      }
+
+      @keyframes splash-dismiss {
+        0%,
+        84% {
+          opacity: 1;
+          pointer-events: auto;
+        }
+        85% {
+          pointer-events: none;
+        }
+        100% {
+          opacity: 0;
+          visibility: hidden;
+          pointer-events: none;
+        }
+      }
+
+      @keyframes splash-mark-in {
+        0% {
+          opacity: 0;
+          transform: scale(0.82) translate3d(0, 8px, 0);
+        }
+        60% {
+          opacity: 1;
+          transform: scale(1.03) translate3d(0, 0, 0);
+        }
+        100% {
+          opacity: 1;
+          transform: scale(1) translate3d(0, 0, 0);
+        }
+      }
+
+      @keyframes splash-rise {
+        from {
+          opacity: 0;
+          transform: translate3d(0, 12px, 0);
+        }
+        to {
+          opacity: 1;
+          transform: translate3d(0, 0, 0);
+        }
+      }
+
+      @keyframes splash-fade-in {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      @keyframes splash-progress {
+        from {
+          transform: scaleX(0);
+        }
+        to {
+          transform: scaleX(1);
+        }
+      }
+
+      @keyframes splash-drift {
+        from {
+          transform: translate3d(0, 0, 0);
+        }
+        to {
+          transform: translate3d(-50%, 0, 0);
+        }
+      }
+
+      @keyframes splash-ripple {
+        0% {
+          opacity: 0.55;
+          transform: scale(0.86);
+        }
+        55% {
+          opacity: 0.16;
+        }
+        100% {
+          opacity: 0;
+          transform: scale(2.3);
+        }
+      }
+
+      @keyframes splash-bubble {
+        0% {
+          opacity: 0;
+          transform: translate3d(0, 18px, 0) scale(0.6);
+        }
+        15% {
+          opacity: 0.55;
+        }
+        70% {
+          opacity: 0.3;
+        }
+        100% {
+          opacity: 0;
+          transform: translate3d(var(--drift, 10px), -185px, 0) scale(1);
+        }
+      }
+
+      @media (max-height: 640px) {
+        .splash__content {
+          margin-top: -3vh;
+        }
+
+        .splash__mark-wrap,
+        .splash__ring {
+          width: 80px;
+          height: 80px;
+        }
+
+        .splash__mark {
+          width: 74px;
+          height: 74px;
+          border-radius: 22px;
+        }
+
+        .splash__mark svg {
+          width: 40px;
+          height: 40px;
+        }
+
+        .splash__title {
+          margin-top: 20px;
+          font-size: 26px;
+        }
+
+        .splash__loader {
+          margin-top: 22px;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .splash__wave,
+        .splash__ring,
+        .splash__bubble,
+        .splash__loader::after {
+          animation: none !important;
+        }
+
+        .splash__wave {
+          transform: translate3d(-25%, 0, 0);
+        }
+
+        .splash__ring {
+          opacity: 0.22;
+        }
+
+        .splash__bubble {
+          opacity: 0;
+        }
+
+        .splash__mark,
+        .splash__title,
+        .splash__tagline,
+        .splash__loader {
+          animation: none !important;
+          opacity: 1;
+          transform: none;
+        }
+
+        .splash__loader::after {
+          transform: scaleX(1);
+        }
+
+        #app-splash {
+          animation: splash-dismiss 2.5s linear forwards;
+        }
+      }
+    </style>
   </head>
 
   <body>
+    <div id="app-splash" role="status" aria-label="Loading HagonoyTides">
+      <svg class="splash__defs" aria-hidden="true" focusable="false">
+        <defs>
+          <linearGradient id="splashWaveFar" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#22d3ee" stop-opacity="0.22" />
+            <stop offset="100%" stop-color="#0e7490" stop-opacity="0" />
+          </linearGradient>
+
+          <linearGradient id="splashWaveMid" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#0ea5e9" stop-opacity="0.26" />
+            <stop offset="100%" stop-color="#083344" stop-opacity="0.04" />
+          </linearGradient>
+
+          <linearGradient id="splashWaveNear" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#0a2536" />
+            <stop offset="55%" stop-color="#051826" />
+            <stop offset="100%" stop-color="#040e18" />
+          </linearGradient>
+
+          <linearGradient id="splashLogoFill" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#ecfeff" />
+            <stop offset="100%" stop-color="#a5f3fc" />
+          </linearGradient>
+
+          <linearGradient id="splashLogoWave" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#67e8f9" />
+            <stop offset="50%" stop-color="#22d3ee" />
+            <stop offset="100%" stop-color="#67e8f9" />
+          </linearGradient>
+        </defs>
+      </svg>
+
+      <div class="splash__glow splash__glow--top"></div>
+      <div class="splash__glow splash__glow--side"></div>
+
+      <div class="splash__ocean" aria-hidden="true">
+        <div class="splash__wave splash__wave--far">
+          <svg viewBox="0 0 1440 240" preserveAspectRatio="none" focusable="false">
+            <path
+              d="M0 56 C90 56 90 112 180 112 S270 56 360 56 S450 112 540 112 S630 56 720 56 S810 112 900 112 S990 56 1080 56 S1170 112 1260 112 S1350 56 1440 56 L1440 240 L0 240 Z"
+              fill="url(#splashWaveFar)"
+            />
+            <path
+              d="M0 56 C90 56 90 112 180 112 S270 56 360 56 S450 112 540 112 S630 56 720 56 S810 112 900 112 S990 56 1080 56 S1170 112 1260 112 S1350 56 1440 56"
+              fill="none"
+              stroke="#a5f3fc"
+              stroke-opacity="0.2"
+              stroke-width="1.4"
+              vector-effect="non-scaling-stroke"
+            />
+          </svg>
+          <svg viewBox="0 0 1440 240" preserveAspectRatio="none" focusable="false">
+            <path
+              d="M0 56 C90 56 90 112 180 112 S270 56 360 56 S450 112 540 112 S630 56 720 56 S810 112 900 112 S990 56 1080 56 S1170 112 1260 112 S1350 56 1440 56 L1440 240 L0 240 Z"
+              fill="url(#splashWaveFar)"
+            />
+            <path
+              d="M0 56 C90 56 90 112 180 112 S270 56 360 56 S450 112 540 112 S630 56 720 56 S810 112 900 112 S990 56 1080 56 S1170 112 1260 112 S1350 56 1440 56"
+              fill="none"
+              stroke="#a5f3fc"
+              stroke-opacity="0.2"
+              stroke-width="1.4"
+              vector-effect="non-scaling-stroke"
+            />
+          </svg>
+        </div>
+
+        <div class="splash__wave splash__wave--mid">
+          <svg viewBox="0 0 1440 240" preserveAspectRatio="none" focusable="false">
+            <path
+              d="M0 56 C90 56 90 112 180 112 S270 56 360 56 S450 112 540 112 S630 56 720 56 S810 112 900 112 S990 56 1080 56 S1170 112 1260 112 S1350 56 1440 56 L1440 240 L0 240 Z"
+              fill="url(#splashWaveMid)"
+            />
+            <path
+              d="M0 56 C90 56 90 112 180 112 S270 56 360 56 S450 112 540 112 S630 56 720 56 S810 112 900 112 S990 56 1080 56 S1170 112 1260 112 S1350 56 1440 56"
+              fill="none"
+              stroke="#67e8f9"
+              stroke-opacity="0.16"
+              stroke-width="1.4"
+              vector-effect="non-scaling-stroke"
+            />
+          </svg>
+          <svg viewBox="0 0 1440 240" preserveAspectRatio="none" focusable="false">
+            <path
+              d="M0 56 C90 56 90 112 180 112 S270 56 360 56 S450 112 540 112 S630 56 720 56 S810 112 900 112 S990 56 1080 56 S1170 112 1260 112 S1350 56 1440 56 L1440 240 L0 240 Z"
+              fill="url(#splashWaveMid)"
+            />
+            <path
+              d="M0 56 C90 56 90 112 180 112 S270 56 360 56 S450 112 540 112 S630 56 720 56 S810 112 900 112 S990 56 1080 56 S1170 112 1260 112 S1350 56 1440 56"
+              fill="none"
+              stroke="#67e8f9"
+              stroke-opacity="0.16"
+              stroke-width="1.4"
+              vector-effect="non-scaling-stroke"
+            />
+          </svg>
+        </div>
+
+        <div class="splash__wave splash__wave--near">
+          <svg viewBox="0 0 1440 240" preserveAspectRatio="none" focusable="false">
+            <path
+              d="M0 56 C90 56 90 112 180 112 S270 56 360 56 S450 112 540 112 S630 56 720 56 S810 112 900 112 S990 56 1080 56 S1170 112 1260 112 S1350 56 1440 56 L1440 240 L0 240 Z"
+              fill="url(#splashWaveNear)"
+            />
+            <path
+              d="M0 56 C90 56 90 112 180 112 S270 56 360 56 S450 112 540 112 S630 56 720 56 S810 112 900 112 S990 56 1080 56 S1170 112 1260 112 S1350 56 1440 56"
+              fill="none"
+              stroke="#a5f3fc"
+              stroke-opacity="0.24"
+              stroke-width="1.4"
+              vector-effect="non-scaling-stroke"
+            />
+          </svg>
+          <svg viewBox="0 0 1440 240" preserveAspectRatio="none" focusable="false">
+            <path
+              d="M0 56 C90 56 90 112 180 112 S270 56 360 56 S450 112 540 112 S630 56 720 56 S810 112 900 112 S990 56 1080 56 S1170 112 1260 112 S1350 56 1440 56 L1440 240 L0 240 Z"
+              fill="url(#splashWaveNear)"
+            />
+            <path
+              d="M0 56 C90 56 90 112 180 112 S270 56 360 56 S450 112 540 112 S630 56 720 56 S810 112 900 112 S990 56 1080 56 S1170 112 1260 112 S1350 56 1440 56"
+              fill="none"
+              stroke="#a5f3fc"
+              stroke-opacity="0.24"
+              stroke-width="1.4"
+              vector-effect="non-scaling-stroke"
+            />
+          </svg>
+        </div>
+
+        <div class="splash__bubbles">
+          <span
+            class="splash__bubble"
+            style="--x: 9%; --size: 4px; --delay: 0.25s; --duration: 4.6s; --drift: 12px"
+          ></span>
+          <span
+            class="splash__bubble"
+            style="--x: 20%; --size: 3px; --delay: 1.4s; --duration: 5.4s; --drift: -8px"
+          ></span>
+          <span
+            class="splash__bubble"
+            style="--x: 34%; --size: 5px; --delay: 0.7s; --duration: 4.2s; --drift: 16px"
+          ></span>
+          <span
+            class="splash__bubble"
+            style="--x: 48%; --size: 3px; --delay: 2.1s; --duration: 5.8s; --drift: -12px"
+          ></span>
+          <span
+            class="splash__bubble"
+            style="--x: 63%; --size: 4px; --delay: 1s; --duration: 4.9s; --drift: 9px"
+          ></span>
+          <span
+            class="splash__bubble"
+            style="--x: 76%; --size: 3px; --delay: 0.45s; --duration: 5.2s; --drift: -14px"
+          ></span>
+          <span
+            class="splash__bubble"
+            style="--x: 88%; --size: 5px; --delay: 1.8s; --duration: 4.4s; --drift: 11px"
+          ></span>
+          <span
+            class="splash__bubble"
+            style="--x: 55%; --size: 2px; --delay: 0.9s; --duration: 6s; --drift: 7px"
+          ></span>
+        </div>
+      </div>
+
+      <div class="splash__content">
+        <div class="splash__mark-wrap">
+          <span class="splash__ring"></span>
+          <span class="splash__ring"></span>
+
+          <div class="splash__mark">
+            <svg viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+              <path
+                d="M32 9.5 11.5 27.5h5.2v13.2h30.6V27.5h5.2L32 9.5Z"
+                fill="url(#splashLogoFill)"
+              />
+              <rect
+                x="27.6"
+                y="28.5"
+                width="8.8"
+                height="12.2"
+                rx="1.4"
+                fill="#082b3d"
+              />
+              <path
+                d="M6 42c5 0 5-3.8 10-3.8s5 3.8 10 3.8 5-3.8 10-3.8 5 3.8 10 3.8 5-3.8 10-3.8"
+                fill="none"
+                stroke="url(#splashLogoWave)"
+                stroke-width="3"
+                stroke-linecap="round"
+              />
+              <path
+                d="M6 51c5 0 5-3.8 10-3.8s5 3.8 10 3.8 5-3.8 10-3.8 5 3.8 10 3.8 5-3.8 10-3.8"
+                fill="none"
+                stroke="#22d3ee"
+                stroke-opacity="0.62"
+                stroke-width="3"
+                stroke-linecap="round"
+              />
+            </svg>
+          </div>
+        </div>
+
+        <p class="splash__title">Hagonoy<span>Tides</span></p>
+        <p class="splash__tagline">Local tide monitoring</p>
+
+        <div class="splash__loader" aria-hidden="true"></div>
+      </div>
+    </div>
+
     <div id="root"></div>
+
+    <script>
+      // The splash hides itself with CSS even if JavaScript fails.
+      // This only removes the finished node from the document.
+      window.setTimeout(function () {
+        var splash = document.getElementById("app-splash");
+
+        if (splash) {
+          splash.remove();
+        }
+      }, 2700);
+    </script>
+
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
