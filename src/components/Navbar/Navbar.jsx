@@ -85,10 +85,8 @@ function Navbar() {
         left-1/2
         -translate-x-1/2
         overflow-hidden
-        border
-        border-white/[0.13]
-        bg-[#07132d]/[0.68]
-        shadow-[0_12px_45px_rgba(0,0,0,0.18)]
+        bg-[#060d18]/[0.78]
+        shadow-[0_24px_70px_-36px_rgba(0,0,0,0.9)]
         backdrop-blur-[28px]
         backdrop-saturate-150
         transition-all
@@ -112,7 +110,7 @@ function Navbar() {
           justify-between
           px-3
           sm:px-5
-          ${show ? "border-b border-white/[0.08]" : ""}
+          ${show ? "border-b border-white/[0.035]" : ""}
         `}
       >
         {/* Brand */}
@@ -130,7 +128,7 @@ function Navbar() {
             py-1.5
             transition-all
             duration-200
-            hover:bg-white/[0.04]
+            hover:bg-white/[0.02]
             active:scale-[0.97]
           "
         >
@@ -191,7 +189,7 @@ function Navbar() {
         </NavLink>
 
         {/* Desktop Navigation */}
-        <div className="hidden xl:flex items-center gap-1 rounded-full border border-white/[0.08] bg-white/[0.035] p-1">
+        <div className="hidden xl:flex items-center gap-1 rounded-full border border-white/[0.035] bg-white/[0.02] p-1">
           {navigation.map((item) => {
             const Icon = item.icon;
 
@@ -217,11 +215,11 @@ function Navbar() {
                       ? `
                         bg-white/[0.12]
                         text-white
-                        shadow-[inset_0_1px_1px_rgba(255,255,255,0.10)]
+                        shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]
                       `
                       : `
                         text-white/55
-                        hover:bg-white/[0.06]
+                        hover:bg-white/[0.03]
                         hover:text-white/90
                       `
                   }
@@ -267,13 +265,13 @@ function Navbar() {
             justify-center
             rounded-full
             border
-            border-white/[0.10]
-            bg-white/[0.06]
+            border-white/[0.04]
+            bg-white/[0.03]
             text-white
             shadow-[inset_0_1px_1px_rgba(255,255,255,0.08)]
             transition-all
             duration-200
-            hover:bg-white/[0.10]
+            hover:bg-white/[0.02]
             active:scale-90
           "
         >
@@ -353,15 +351,15 @@ function Navbar() {
                   ${
                     isActive
                       ? `
-                        border-white/[0.14]
+                        border-white/[0.05]
                         bg-white/[0.09]
                         shadow-[inset_0_1px_1px_rgba(255,255,255,0.08)]
                       `
                       : `
                         border-transparent
-                        bg-white/[0.025]
-                        hover:border-white/[0.08]
-                        hover:bg-white/[0.06]
+                        bg-white/[0.015]
+                        hover:border-white/[0.035]
+                        hover:bg-white/[0.03]
                       `
                   }
                 `}
@@ -382,7 +380,7 @@ function Navbar() {
                         ${
                           isActive
                             ? "border-cyan-200/20 bg-cyan-200/[0.10] text-cyan-100"
-                            : "border-white/[0.08] bg-white/[0.04] text-white/45 group-hover:text-white/70"
+                            : "border-white/[0.035] bg-white/[0.02] text-white/45 group-hover:text-white/70"
                         }
                       `}
                     >
@@ -435,8 +433,8 @@ function Navbar() {
               overflow-hidden
               rounded-[22px]
               border
-              border-white/[0.09]
-              bg-white/[0.045]
+              border-white/[0.04]
+              bg-white/[0.015]
               p-4
               backdrop-blur-xl
             "

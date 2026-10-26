@@ -27,6 +27,7 @@ function TideContainer() {
   const monthToday = new Date().getMonth();
   const todayIndex = tides.findIndex((tide) => tide.date == today);
   const tideRefs = useRef([]);
+  const tideScrollRef = useRef(null);
 
   const months = [
     "January",
@@ -146,30 +147,37 @@ function TideContainer() {
   }, [dateIndex]);
 
   useEffect(() => {
-    if (todayIndex !== -1 && tideRefs.current[todayIndex]) {
-      tideRefs.current[
-        months[monthToday] == data.monthlyTides[dateIndex].month
-          ? todayIndex
-          : 0
-      ].scrollIntoView({
+    const container = tideScrollRef.current;
+    if (!container || todayIndex === -1) return;
+
+    const isCurrentMonth =
+      data?.monthlyTides?.[dateIndex]?.month === months[monthToday];
+    const targetIndex = isCurrentMonth ? todayIndex : 0;
+    const card = tideRefs.current[targetIndex];
+    if (!card) return;
+
+    // Scroll only the tide list horizontally. Avoid scrollIntoView so the
+    // whole page never jumps when the app opens.
+    const targetLeft = Math.max(0, card.offsetLeft - 16);
+    if (Math.abs(container.scrollLeft - targetLeft) > 2) {
+      container.scrollTo({
+        left: targetLeft,
         behavior: "smooth",
-        inline: "start",
-        block: "nearest",
       });
     }
   }, [tides]);
 
   return (
     <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
+      initial={{ opacity: 0, filter: "blur(6px)" }}
+      animate={{ opacity: 1, filter: "blur(0px)" }}
       transition={{ duration: 0.35 }}
       className="w-full overflow-hidden"
     >
       {/* AI Intro */}
       <motion.div
-        initial={{ opacity: 0, y: -6 }}
-        animate={{ opacity: 1, y: 0 }}
+        initial={{ opacity: 0, y: -6, filter: "blur(6px)" }}
+        animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
         transition={{ duration: 0.3, ease: "easeOut" }}
       >
         <AIIntroNotification />
@@ -184,13 +192,13 @@ function TideContainer() {
             </span>
           </div>
 
-          <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-[#080d0b]/80 p-1.5 shadow-[0_8px_30px_rgba(0,0,0,0.25)] backdrop-blur-2xl">
+          <div className="relative overflow-hidden rounded-2xl bg-[#07111d]/80 p-1.5 shadow-[0_18px_60px_-36px_rgba(0,0,0,0.8)] ring-1 ring-white/[0.04] backdrop-blur-2xl">
             <div className="flex gap-1 justify-center overflow-x-auto scrollbar-none">
               {isLoading
                 ? monthButtonData.map((_, key) => (
                     <div
                       key={key}
-                      className="h-8 w-12 shrink-0 animate-pulse rounded-xl bg-white/[0.06]"
+                      className="h-8 w-12 shrink-0 animate-pulse rounded-xl bg-white/[0.03]"
                     />
                   ))
                 : monthButtonData.map((monthData) => {
@@ -204,7 +212,7 @@ function TideContainer() {
                         className={`relative h-8 min-w-[48px] shrink-0 rounded-xl text-[11px] font-semibold transition-colors ${
                           active
                             ? "text-white"
-                            : "text-white/40 hover:bg-white/[0.06] hover:text-white/80"
+                            : "text-white/40 hover:bg-white/[0.03] hover:text-white/80"
                         }`}
                       >
                         {active && (
@@ -215,7 +223,7 @@ function TideContainer() {
                               stiffness: 500,
                               damping: 35,
                             }}
-                            className="absolute inset-0 rounded-xl border border-emerald-300/30 bg-emerald-500/25 shadow-[0_0_20px_rgba(16,185,129,0.18)]"
+                            className="absolute inset-0 rounded-xl bg-cyan-400/[0.1] shadow-[0_0_24px_-8px_rgba(34,211,238,0.35)] ring-1 ring-cyan-300/[0.12]"
                           />
                         )}
 
@@ -245,8 +253,8 @@ function TideContainer() {
             ) : (
               <motion.h1
                 key={dateIndex}
-                initial={{ opacity: 0, x: -5 }}
-                animate={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0, x: -5, filter: "blur(6px)" }}
+                animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
                 transition={{ duration: 0.2 }}
                 className="text-xl font-bold tracking-tight text-white sm:text-2xl"
               >
@@ -255,7 +263,7 @@ function TideContainer() {
             )}
           </div>
 
-          <div className="rounded-lg border border-white/10 bg-white/[0.06] px-2.5 py-1 text-xs font-semibold tabular-nums text-white/60">
+          <div className="rounded-lg bg-white/[0.035] px-2.5 py-1 text-xs font-semibold tabular-nums text-white/55">
             {isLoading ? <Skeleton className="h-4 w-10" /> : data.year}
           </div>
         </motion.div>
@@ -273,9 +281,10 @@ function TideContainer() {
           </div>
         ) : (
           <motion.div
+            ref={tideScrollRef}
             key={`tides-${dateIndex}`}
-            initial={{ opacity: 0, y: 6 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 6, filter: "blur(6px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             transition={{ duration: 0.25, ease: "easeOut" }}
             className="flex h-60 max-w-full gap-4 overflow-x-auto overflow-y-hidden px-5 scrollbar-none sm:gap-5"
           >
@@ -284,8 +293,8 @@ function TideContainer() {
                 <motion.div
                   key={key}
                   ref={(el) => (tideRefs.current[key] = el)}
-                  initial={{ opacity: 0, x: 6 }}
-                  animate={{ opacity: 1, x: 0 }}
+                  initial={{ opacity: 0, x: 6, filter: "blur(6px)" }}
+                  animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
                   transition={{
                     duration: 0.25,
                     delay: key * 0.035,
@@ -302,8 +311,8 @@ function TideContainer() {
 
         {/* AI Response */}
         <motion.div
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 8, filter: "blur(6px)" }}
+          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           transition={{ duration: 0.3, delay: 0.05 }}
           className="px-1"
         >

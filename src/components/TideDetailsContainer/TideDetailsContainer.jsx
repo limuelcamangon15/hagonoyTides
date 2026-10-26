@@ -21,7 +21,6 @@ function TideDetailsContainer({ tideLevel, time }) {
         justify-between
         gap-2
         rounded-lg
-        border
         px-2
         text-sm
         tracking-wider
@@ -32,14 +31,12 @@ function TideDetailsContainer({ tideLevel, time }) {
         ${
           isHighTide
             ? `
-              border-red-300/20
-              bg-red-500/25
-              shadow-[0_4px_16px_rgba(239,68,68,0.10)]
+              bg-red-400/[0.08]
+              shadow-[0_4px_16px_rgba(239,68,68,0.06)]
             `
             : `
-              border-white/20
-              bg-white/20
-              shadow-[0_4px_16px_rgba(0,0,0,0.06)]
+              bg-white/[0.035]
+              shadow-[0_4px_16px_rgba(0,0,0,0.04)]
             `
         }
       `}
@@ -54,7 +51,7 @@ function TideDetailsContainer({ tideLevel, time }) {
           w-[2px]
           -translate-y-1/2
           rounded-full
-          ${isHighTide ? "bg-red-400/80" : "bg-emerald-300/60"}
+          ${isHighTide ? "bg-red-400/60" : "bg-emerald-300/45"}
         `}
       />
 

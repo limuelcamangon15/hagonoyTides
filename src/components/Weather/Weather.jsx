@@ -129,15 +129,15 @@ function Weather() {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 14, scale: 0.97 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
+      initial={{ opacity: 0, y: 14, scale: 0.97, filter: "blur(6px)" }}
+      animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
       transition={{
         duration: 0.4,
         ease: [0.22, 1, 0.36, 1],
       }}
       className={`${
-        fetchingData && "animate-pulse bg-gray-500/30"
-      } relative flex flex-row justify-between p-1 gap-5 mt-23 mx-auto rounded-4xl border border-yellow-500/30 backdrop-blur-2xl w-[95%] h-50 overflow-hidden`}
+        fetchingData && "bg-white/[0.03]"
+      } relative flex flex-row justify-between p-1 gap-5 mt-23 mx-auto rounded-[32px] bg-[#07111d]/75 shadow-[0_30px_90px_-45px_rgba(0,0,0,0.9)] ring-1 ring-white/[0.04] backdrop-blur-2xl w-[95%] h-50 overflow-hidden`}
     >
       <>
         {/*!fetchingData && (
@@ -160,7 +160,7 @@ function Weather() {
         <div
           className={`${
             time.getHours() >= 18 || time.getHours() < 6 ? "saturate-0" : ""
-          } z-10 flex flex-row w-full backdrop-brightness-80 backdrop-blur-xs rounded-3xl text-white/50 px-5 py-5 md:px-20`}
+          } z-10 flex flex-row w-full backdrop-brightness-90 backdrop-blur-xs rounded-3xl text-white/50 px-5 py-5 md:px-20`}
         >
           {/* Left Side */}
           <div className="flex flex-col gap-2 w-1/2 justify-between text-left">

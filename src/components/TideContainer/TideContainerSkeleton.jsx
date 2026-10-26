@@ -6,8 +6,8 @@ function TideContainerSkeleton({ countOfSkeletons }) {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 14, scale: 0.97 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
+      initial={{ opacity: 0, y: 14, scale: 0.97, filter: "blur(6px)" }}
+      animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
       transition={{
         duration: 0.4,
         ease: [0.22, 1, 0.36, 1],
@@ -23,8 +23,8 @@ function TideContainerSkeleton({ countOfSkeletons }) {
         overflow-hidden
         rounded-[24px]
         border
-        border-white/[0.12]
-        bg-white/[0.055]
+        border-white/[0.05]
+        bg-white/[0.03]
         shadow-[0_6px_30px_rgba(0,0,0,0.10)]
         backdrop-blur-2xl
       `}
@@ -40,7 +40,7 @@ function TideContainerSkeleton({ countOfSkeletons }) {
           h-px
           bg-gradient-to-r
           from-transparent
-          via-white/40
+          via-white/[0.08]
           to-transparent
         "
       />
@@ -54,7 +54,7 @@ function TideContainerSkeleton({ countOfSkeletons }) {
           rounded-[24px]
           ring-1
           ring-inset
-          ring-white/[0.04]
+          ring-white/[0.02]
         "
       />
 
@@ -74,7 +74,7 @@ function TideContainerSkeleton({ countOfSkeletons }) {
         <div className="flex items-center gap-2">
           {/* Day Skeleton */}
           <div className="relative overflow-hidden rounded-md">
-            <Skeleton className="w-8 h-3 bg-white/10" />
+            <Skeleton className="w-8 h-3 bg-white/[0.04]" />
             <motion.div
               animate={{ x: ["-100%", "100%"] }}
               transition={{
@@ -89,7 +89,7 @@ function TideContainerSkeleton({ countOfSkeletons }) {
 
         {/* Date Skeleton */}
         <div className="relative overflow-hidden rounded-md">
-          <Skeleton className="w-5 h-3 bg-white/10" />
+          <Skeleton className="w-5 h-3 bg-white/[0.04]" />
           <motion.div
             animate={{ x: ["-100%", "100%"] }}
             transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
@@ -119,17 +119,17 @@ function TideContainerSkeleton({ countOfSkeletons }) {
           {skeletonsArray.map((_, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 7 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, y: 7, filter: "blur(6px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
               transition={{
                 delay: index * 0.07 + 0.12,
                 duration: 0.3,
                 ease: [0.22, 1, 0.36, 1],
               }}
-              className="relative overflow-hidden w-full h-7 rounded-xl bg-white/[0.04] border border-white/[0.04] px-2.5 flex items-center justify-between"
+              className="relative overflow-hidden w-full h-7 rounded-xl bg-white/[0.02] border border-white/[0.04] px-2.5 flex items-center justify-between"
             >
-              <Skeleton className="w-10 h-2.5 bg-white/10 rounded" />
-              <Skeleton className="w-5 h-2.5 bg-white/10 rounded" />
+              <Skeleton className="w-10 h-2.5 bg-white/[0.04] rounded" />
+              <Skeleton className="w-5 h-2.5 bg-white/[0.04] rounded" />
 
               <motion.div
                 animate={{ x: ["-100%", "100%"] }}
@@ -158,7 +158,7 @@ function TideContainerSkeleton({ countOfSkeletons }) {
           -translate-x-1/2
           rounded-full
           blur-3xl
-          bg-white/5
+          bg-white/[0.025]
         "
       />
     </motion.div>

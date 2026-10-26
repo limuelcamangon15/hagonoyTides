@@ -5,15 +5,22 @@ function Footer() {
   return (
     <footer
       className="
+        relative
         flex
         w-full
         md:w-4/5
         flex-col
         gap-4
-        border-t
-        border-white/10
         p-5
         text-white/70
+        before:absolute
+        before:inset-x-0
+        before:top-0
+        before:h-px
+        before:bg-gradient-to-r
+        before:from-transparent
+        before:via-white/[0.06]
+        before:to-transparent
       "
     >
       {/* Top Row */}
@@ -54,7 +61,19 @@ function Footer() {
             to="/limuelcamangon/buy-me-a-coffee"
             className="transition-colors hover:text-white/80"
           >
-            Support the website
+            Support
+          </NavLink>
+
+          <span className="text-white/15">•</span>
+
+          <NavLink to="/privacy" className="transition-colors hover:text-white/80">
+            Privacy
+          </NavLink>
+
+          <span className="text-white/15">•</span>
+
+          <NavLink to="/terms" className="transition-colors hover:text-white/80">
+            Terms
           </NavLink>
         </nav>
       </div>
@@ -79,9 +98,7 @@ function Footer() {
             items-center
             gap-1.5
             rounded-full
-            border
-            border-white/10
-            bg-white/[0.04]
+            bg-white/[0.025]
             px-3
             py-1.5
             text-[10px]
@@ -89,7 +106,7 @@ function Footer() {
             text-white/45
             transition-all
             duration-200
-            hover:border-amber-300/20
+           
             hover:bg-amber-300/[0.06]
             hover:text-white/80
           "

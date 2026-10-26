@@ -10,7 +10,7 @@ textarea::-webkit-scrollbar {
 }
 
 textarea::-webkit-scrollbar-thumb {
-  @apply rounded-full bg-white/40 cursor-grab;
+  @apply rounded-full bg-white/[0.1] cursor-grab;
 }
 
 /* SECTION SCROLLBARS (generic rule) */
@@ -19,7 +19,7 @@ section::-webkit-scrollbar {
 }
 
 section::-webkit-scrollbar-thumb {
-  @apply rounded-full bg-white/40 cursor-grab;
+  @apply rounded-full bg-white/[0.1] cursor-grab;
 }
 
 /* DIV SCROLLBARS (generic rule) */
@@ -28,7 +28,7 @@ div::-webkit-scrollbar {
 }
 
 div::-webkit-scrollbar-thumb {
-  @apply rounded-full bg-white/40 cursor-grab;
+  @apply rounded-full bg-white/[0.1] cursor-grab;
 }
 
 /* PAGE / BROWSER SCROLLBAR     */
@@ -44,4 +44,106 @@ body::-webkit-scrollbar-thumb {
 
 body {
   @apply m-0 bg-gray-950;
+  color: rgba(248, 250, 252, 0.92);
+}
+
+/* Premium surfaces and hairlines */
+.surface-premium {
+  background: linear-gradient(180deg, rgba(14, 24, 42, 0.86), rgba(7, 13, 26, 0.9));
+  backdrop-filter: blur(28px) saturate(135%);
+  box-shadow:
+    0 30px 90px -45px rgba(0, 0, 0, 0.9),
+    inset 0 1px 0 rgba(255, 255, 255, 0.035);
+}
+
+.surface-soft {
+  background: linear-gradient(180deg, rgba(12, 20, 36, 0.72), rgba(6, 12, 24, 0.82));
+  backdrop-filter: blur(22px) saturate(125%);
+  box-shadow:
+    0 18px 60px -36px rgba(0, 0, 0, 0.75),
+    inset 0 1px 0 rgba(255, 255, 255, 0.025);
+}
+
+.hairline {
+  border: 1px solid rgba(255, 255, 255, 0.045);
+}
+
+.hairline-strong {
+  border: 1px solid rgba(255, 255, 255, 0.075);
+}
+
+/* Premium shimmer skeleton */
+.skeleton-shimmer {
+  position: relative;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.045);
+}
+
+.skeleton-shimmer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.08),
+    transparent
+  );
+  animation: skeleton-shimmer 1.5s ease-in-out infinite;
+}
+
+@keyframes skeleton-shimmer {
+  to {
+    transform: translateX(100%);
+  }
+}
+
+/* Thin, quiet scrollbars */
+*::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+/* Vertical fade mask for scroll containers */
+.mask-fade-y {
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent,
+    black 10%,
+    black 90%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    transparent,
+    black 10%,
+    black 90%,
+    transparent
+  );
+}
+
+/* Respect reduced motion everywhere */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }

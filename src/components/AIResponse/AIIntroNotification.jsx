@@ -9,8 +9,8 @@ function AiIntroNotification() {
     <AnimatePresence>
       {show && (
         <motion.div
-          initial={{ opacity: 0, y: 12, scale: 0.98 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
+          initial={{ opacity: 0, y: 12, scale: 0.98, filter: "blur(6px)" }}
+          animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
           exit={{ opacity: 0, y: -6, scale: 0.97 }}
           transition={{
             duration: 0.3,
@@ -18,9 +18,9 @@ function AiIntroNotification() {
           }}
           className="w-full px-4"
         >
-          <div className="mx-auto flex w-full max-w-4xl items-start gap-3 rounded-[22px] border border-white/[0.12] bg-white/[0.07] p-3.5 shadow-[0_12px_40px_rgba(0,0,0,0.18)] backdrop-blur-2xl">
+          <div className="mx-auto flex w-full max-w-4xl items-start gap-3 rounded-[22px] bg-[#07111d]/80 p-3.5 shadow-[0_18px_60px_-36px_rgba(0,0,0,0.8)] ring-1 ring-white/[0.04] backdrop-blur-2xl">
             {/* Tidy Icon */}
-            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[12px] border border-emerald-300/10 bg-emerald-300/[0.08]">
+            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[12px] bg-emerald-400/[0.08]">
               <Bot
                 className="h-[18px] w-[18px] text-emerald-300/80"
                 strokeWidth={1.8}
@@ -52,7 +52,7 @@ function AiIntroNotification() {
               onClick={() => setShow(false)}
               aria-label="Close Tidy introduction"
               whileTap={{ scale: 0.85 }}
-              className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-white/30 transition-colors duration-200 hover:bg-white/10 hover:text-white/70"
+              className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-white/30 transition-colors duration-200 hover:bg-white/[0.04] hover:text-white/70"
             >
               <X className="h-4 w-4" strokeWidth={2} />
             </motion.button>

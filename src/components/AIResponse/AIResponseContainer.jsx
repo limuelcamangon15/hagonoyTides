@@ -5,8 +5,8 @@ function AIResponseContainer({ content }) {
   return (
     <motion.div
       className="m-3 flex flex-col gap-2"
-      initial={{ opacity: 0, y: 8 }}
-      animate={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0, y: 8, filter: "blur(6px)" }}
+      animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
       transition={{ duration: 0.25, ease: "easeOut" }}
     >
       {/* Tidy Header */}
@@ -16,12 +16,11 @@ function AIResponseContainer({ content }) {
           <motion.div
             className="
               flex h-8 w-8 items-center justify-center rounded-[11px]
-              border border-emerald-300/25
-              bg-emerald-400/15
-              shadow-[0_0_16px_rgba(16,185,129,0.12)]
+              bg-emerald-400/[0.08]
+              shadow-[0_0_18px_-6px_rgba(16,185,129,0.35)]
             "
-            initial={{ opacity: 0, scale: 0.85 }}
-            animate={{ opacity: 1, scale: 1 }}
+            initial={{ opacity: 0, scale: 0.85, filter: "blur(6px)" }}
+            animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
             transition={{ duration: 0.2, delay: 0.05 }}
           >
             <BotIcon size={17} strokeWidth={1.8} className="text-emerald-300" />
@@ -48,7 +47,7 @@ function AIResponseContainer({ content }) {
         <span
           className="
             rounded-full
-            border border-emerald-300/20
+            
             bg-emerald-400/10
             px-2 py-1
             text-[9px]
@@ -70,12 +69,11 @@ function AIResponseContainer({ content }) {
           overflow-hidden
           rounded-[18px]
           rounded-tl-[5px]
-          border
-          border-emerald-300/20
           bg-gradient-to-br
-          from-emerald-400/[0.18]
-          via-emerald-500/[0.09]
-          to-emerald-950/[0.12]
+          from-emerald-400/[0.10]
+          via-emerald-500/[0.05]
+          to-emerald-950/[0.18]
+          ring-1 ring-emerald-300/[0.08]
           px-3.5
           py-3
           text-sm
@@ -84,8 +82,8 @@ function AIResponseContainer({ content }) {
           shadow-[0_8px_30px_rgba(16,185,129,0.10)]
           backdrop-blur-xl
         `}
-        initial={{ opacity: 0, y: 6, scale: 0.98 }}
-        animate={{ opacity: 1, y: 0, scale: 1 }}
+        initial={{ opacity: 0, y: 6, scale: 0.98, filter: "blur(6px)" }}
+        animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
         transition={{
           duration: 0.3,
           delay: 0.1,
@@ -98,10 +96,9 @@ function AIResponseContainer({ content }) {
             pointer-events-none
             absolute inset-y-0 left-0 w-[2px]
             bg-gradient-to-b
-            from-emerald-300
-            via-emerald-400/50
+            from-emerald-300/60
+            via-emerald-400/25
             to-transparent
-            shadow-[0_0_8px_rgba(52,211,153,0.35)]
           "
         />
 

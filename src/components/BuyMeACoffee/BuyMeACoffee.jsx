@@ -8,7 +8,7 @@ export default function BuyMeACoffee() {
     <main className="min-h-dvh w-full max-w-full overflow-x-hidden px-4 pt-24 text-white sm:px-5">
       <div className="mx-auto flex min-h-[calc(100dvh-12rem)] w-full max-w-2xl flex-col items-center justify-center text-center">
         {/* Small Header */}
-        <div className="mb-5 flex max-w-full items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 backdrop-blur-xl">
+        <div className="mb-5 flex max-w-full items-center gap-2 rounded-full border border-white/[0.04] bg-white/[0.02] px-3 py-1.5 backdrop-blur-xl">
           <Coffee className="h-3.5 w-3.5 shrink-0 text-amber-300/80" />
 
           <span className="truncate text-[10px] font-medium uppercase tracking-[0.16em] text-white/45">
@@ -27,7 +27,7 @@ export default function BuyMeACoffee() {
         </p>
 
         {/* QR Card */}
-        <div className="relative mt-8 max-w-full rounded-[28px] border border-white/[0.12] bg-white/[0.045] p-4 shadow-[0_20px_60px_rgba(0,0,0,0.20)] backdrop-blur-2xl">
+        <div className="relative mt-8 max-w-full rounded-[28px] border border-white/[0.05] bg-white/[0.015] p-4 shadow-[0_20px_60px_rgba(0,0,0,0.20)] backdrop-blur-2xl">
           <div className="pointer-events-none absolute inset-0 rounded-[28px] bg-cyan-300/[0.025]" />
 
           <div className="relative">
@@ -45,9 +45,9 @@ export default function BuyMeACoffee() {
 
         {/* Purpose */}
         <section className="mt-10 w-full">
-          <div className="rounded-[24px] border border-white/[0.08] bg-white/[0.025] p-5 text-left sm:p-6">
+          <div className="rounded-[24px] border border-white/[0.035] bg-white/[0.015] p-5 text-left sm:p-6">
             <div className="flex gap-4">
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[13px] border border-cyan-200/10 bg-cyan-200/[0.06]">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[13px]  bg-cyan-200/[0.06]">
                 <Waves className="h-5 w-5 text-cyan-200/70" strokeWidth={1.7} />
               </div>
 
@@ -76,9 +76,9 @@ export default function BuyMeACoffee() {
 
         {/* Continuous Support */}
         <section className="mt-4 w-full">
-          <div className="rounded-[24px] border border-white/[0.08] bg-white/[0.025] p-5 text-left sm:p-6">
+          <div className="rounded-[24px] border border-white/[0.035] bg-white/[0.015] p-5 text-left sm:p-6">
             <div className="flex gap-4">
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[13px] border border-amber-200/10 bg-amber-200/[0.05]">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[13px]  bg-amber-200/[0.05]">
                 <Heart
                   className="h-5 w-5 text-amber-200/65"
                   strokeWidth={1.7}

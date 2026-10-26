@@ -26,11 +26,12 @@ function Tide({ tide: { date, day, isoDate, tides }, dateIndex }) {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 14, scale: 0.97 }}
+      initial={{ opacity: 0, y: 14, scale: 0.97, filter: "blur(6px)" }}
       animate={{
         opacity: pastDate ? 0.48 : 1,
         y: 0,
         scale: 1,
+        filter: "blur(0px)",
       }}
       transition={{
         duration: 0.4,
@@ -49,19 +50,18 @@ function Tide({ tide: { date, day, isoDate, tides }, dateIndex }) {
         flex-col
         overflow-hidden
         rounded-[24px]
-        border
         backdrop-blur-2xl
         transition-colors
         duration-300
 
         ${
           todayCard
-            ? "border-white/25 bg-white/[0.10] shadow-[0_8px_40px_rgba(0,0,0,0.16)]"
-            : "border-white/[0.12] bg-white/[0.055] shadow-[0_6px_30px_rgba(0,0,0,0.10)]"
+            ? "bg-[#0a1726]/95 shadow-[0_24px_70px_-36px_rgba(34,211,238,0.35)] ring-1 ring-cyan-300/[0.08]"
+            : "bg-[#07121f]/82 shadow-[0_18px_60px_-36px_rgba(0,0,0,0.8)]"
         }
       `}
     >
-      {/* Glass highlight */}
+      {/* Soft top light */}
       <div
         className="
           pointer-events-none
@@ -72,29 +72,16 @@ function Tide({ tide: { date, day, isoDate, tides }, dateIndex }) {
           h-px
           bg-gradient-to-r
           from-transparent
-          via-white/40
+          via-white/[0.06]
           to-transparent
         "
-      />
-
-      {/* Soft inner glow */}
-      <div
-        className={`
-          pointer-events-none
-          absolute
-          inset-0
-          rounded-[24px]
-          ring-1
-          ring-inset
-          ${todayCard ? "ring-white/[0.08]" : "ring-white/[0.04]"}
-        `}
       />
 
       {/* Today's Aurora */}
       {todayCard && (
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+          initial={{ opacity: 0, filter: "blur(6px)" }}
+          animate={{ opacity: 1, filter: "blur(0px)" }}
           transition={{ duration: 0.7 }}
           className="absolute inset-0"
         >
@@ -121,8 +108,8 @@ function Tide({ tide: { date, day, isoDate, tides }, dateIndex }) {
 
       {/* Header */}
       <motion.div
-        initial={{ opacity: 0, y: -5 }}
-        animate={{ opacity: 1, y: 0 }}
+        initial={{ opacity: 0, y: -5, filter: "blur(6px)" }}
+        animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
         transition={{ delay: 0.08, duration: 0.3 }}
         className="
           relative
@@ -151,14 +138,14 @@ function Tide({ tide: { date, day, isoDate, tides }, dateIndex }) {
           {/* Today indicator */}
           {todayCard && (
             <motion.span
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0, scale: 0.8, filter: "blur(6px)" }}
+              animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
               transition={{ delay: 0.2 }}
               className="
                 rounded-full
                 border
-                border-white/15
-                bg-white/10
+                border-white/[0.05]
+                bg-white/[0.04]
                 px-1.5
                 py-0.5
                 text-[8px]
@@ -263,7 +250,7 @@ function Tide({ tide: { date, day, isoDate, tides }, dateIndex }) {
               ? hasHighTide
                 ? "bg-purple-500/10"
                 : "bg-emerald-400/10"
-              : "bg-white/5"
+              : "bg-white/[0.025]"
           }
         `}
       />

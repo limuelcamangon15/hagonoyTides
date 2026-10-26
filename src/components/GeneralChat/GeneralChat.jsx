@@ -107,10 +107,17 @@ function GeneralChat() {
 
   // Automatically scrolls only the messages section cleanly
   useEffect(() => {
-    if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollTop =
-        scrollContainerRef.current.scrollHeight;
-    }
+    const container = scrollContainerRef.current;
+    if (!container) return;
+
+    // Avoid touching the page scroll: only scroll the chat container itself,
+    // and only when its messages actually overflow.
+    if (container.scrollHeight <= container.clientHeight) return;
+
+    container.scrollTo({
+      top: container.scrollHeight,
+      behavior: "auto",
+    });
   }, [messages]);
 
   //get all previous messages using REST
@@ -169,13 +176,13 @@ function GeneralChat() {
     <section className="w-full flex flex-col gap-4 px-4 sm:px-5">
       {/* Header */}
       <header className="pt-1">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between gap-4">
           <div>
-            <h1 className="text-[22px] sm:text-2xl font-semibold tracking-[-0.025em] text-white">
+            <h1 className="text-xl sm:text-2xl font-semibold tracking-[-0.03em] text-white">
               General Chat
             </h1>
 
-            <p className="mt-1.5 max-w-xl text-[13px] sm:text-sm leading-5 text-white/55">
+            <p className="mt-1 max-w-xl text-[13px] sm:text-sm leading-5 text-white/45">
               Chat anonymously with fellow Hagonoeños about tides, weather, and
               local conditions.
             </p>
@@ -184,21 +191,20 @@ function GeneralChat() {
           {/* Online indicator */}
           <div
             className={`hidden sm:flex items-center gap-2 rounded-full px-3 py-1.5
-              border backdrop-blur-xl
+              backdrop-blur-xl transition-colors
               ${
                 isConnecting
-                  ? "border-white/10 bg-white/[0.06] text-white/45"
-                  : "border-emerald-400/15 bg-emerald-400/[0.08] text-emerald-300/80"
+                  ? "bg-white/[0.02] text-white/40"
+                  : "bg-emerald-400/[0.08] text-emerald-200/80"
               }`}
           >
             <span
               className={`h-1.5 w-1.5 rounded-full ${
                 isConnecting
                   ? "bg-white/30"
-                  : "bg-emerald-400 shadow-[0_0_10px_rgba(52,211,153,0.7)]"
+                  : "bg-emerald-400 shadow-[0_0_12px_rgba(52,211,153,0.6)]"
               }`}
             />
-
             <span className="text-[11px] font-medium tracking-wide">
               {isConnecting ? "Connecting" : "Online"}
             </span>
@@ -207,64 +213,15 @@ function GeneralChat() {
       </header>
 
       {/* Main Chat Container */}
-      <div
-        className="
-          relative
-          flex flex-col
-          self-center
-          w-full
-          max-w-5xl
-          h-[min(620px,calc(100vh-210px))]
-          min-h-[400px]
-          overflow-hidden
-          rounded-[28px]
-          border border-white/[0.12]
-          bg-white/[0.055]
-          backdrop-blur-[30px]
-          shadow-[0_20px_70px_rgba(0,0,0,0.18)]
-          ring-1 ring-black/5
-        "
-      >
-        {/* Subtle glass highlight */}
-        <div
-          className="
-            pointer-events-none
-            absolute inset-x-0 top-0 h-px
-            bg-gradient-to-r
-            from-transparent
-            via-white/25
-            to-transparent
-          "
-        />
-
+      <div className="relative flex flex-col self-center w-full max-w-5xl h-[min(640px,calc(100vh-190px))] min-h-[420px] overflow-hidden rounded-[28px] surface-premium hairline">
         {/* Top ambient glow */}
-        <div
-          className="
-            pointer-events-none
-            absolute
-            -top-24
-            left-1/2
-            h-48
-            w-72
-            -translate-x-1/2
-            rounded-full
-            bg-indigo-400/[0.08]
-            blur-3xl
-          "
-        />
+        <div className="pointer-events-none absolute -top-24 left-1/2 h-48 w-72 -translate-x-1/2 rounded-full bg-cyan-400/[0.06] blur-3xl" />
 
         {isConnecting ? (
           <div className="relative flex h-full flex-col p-4 sm:p-6">
             {/* Skeleton messages */}
             <div className="flex flex-1 flex-col justify-start gap-4 overflow-hidden">
-              <div
-                className="
-                  rounded-2xl
-                  border border-white/[0.06]
-                  bg-white/[0.035]
-                  p-4
-                "
-              >
+              <div className="rounded-2xl bg-white/[0.015] p-4">
                 <MessageSkeleton
                   senderLocationWidth="w-30"
                   messageWidth="w-60"
@@ -272,14 +229,7 @@ function GeneralChat() {
                 />
               </div>
 
-              <div
-                className="
-                  rounded-2xl
-                  border border-white/[0.06]
-                  bg-white/[0.035]
-                  p-4
-                "
-              >
+              <div className="rounded-2xl bg-white/[0.015] p-4">
                 <MessageSkeleton
                   senderLocationWidth="w-40"
                   messageWidth="w-30"
@@ -298,42 +248,17 @@ function GeneralChat() {
             {/* Messages */}
             <section
               ref={scrollContainerRef}
-              className="
-                relative
-                flex-1
-                min-h-0
-                w-full
-                overflow-y-auto
-                px-4
-                py-5
-                sm:px-6
-                sm:py-6
-                scrollbar-thin
-                scrollbar-track-transparent
-                scrollbar-thumb-white/10
-                hover:scrollbar-thumb-white/20
-              "
+              className="relative flex-1 min-h-0 w-full overflow-y-auto px-4 py-5 sm:px-6 sm:py-6 mask-fade-y overscroll-contain"
             >
-              <div className="mx-auto flex w-full max-w-4xl flex-col gap-3">
+              <div className="mx-auto flex w-full max-w-4xl flex-col gap-2">
                 {messages.length === 0 ? (
                   <div className="flex flex-1 items-center justify-center py-20">
                     <div className="text-center">
-                      <div
-                        className="
-                          mx-auto mb-4
-                          flex h-12 w-12
-                          items-center justify-center
-                          rounded-full
-                          border border-white/10
-                          bg-white/[0.06]
-                          text-white/35
-                          shadow-inner
-                        "
-                      >
+                      <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-white/[0.02] text-white/30">
                         <Send className="h-5 w-5" />
                       </div>
 
-                      <p className="text-sm font-medium text-white/60">
+                      <p className="text-sm font-medium text-white/65">
                         No messages yet
                       </p>
 
@@ -346,11 +271,10 @@ function GeneralChat() {
                   messages.map((m, index) => (
                     <div
                       key={index}
-                      className="
-                        animate-[fadeIn_0.25s_ease-out]
-                        transition-transform
-                        duration-200
-                      "
+                      className="message-in"
+                      style={{
+                        animationDelay: `${Math.min(index * 0.025, 0.15)}s`,
+                      }}
                     >
                       <Message
                         senderLocation={m.senderLocation}
@@ -364,76 +288,14 @@ function GeneralChat() {
             </section>
 
             {/* Composer area */}
-            <section
-              className="
-                relative
-                shrink-0
-                border-t border-white/[0.08]
-                bg-black/[0.08]
-                px-3
-                pb-3
-                pt-3
-                sm:px-5
-                sm:pb-5
-                sm:pt-4
-                backdrop-blur-2xl
-              "
-            >
+            <section className="relative shrink-0 px-3 pb-3 pt-3 sm:px-5 sm:pb-5 sm:pt-4">
               {/* Top fade */}
-              <div
-                className="
-                  pointer-events-none
-                  absolute
-                  -top-8
-                  left-0
-                  right-0
-                  h-8
-                  bg-gradient-to-t
-                  from-black/[0.08]
-                  to-transparent
-                "
-              />
+              <div className="pointer-events-none absolute -top-8 left-0 right-0 h-8 bg-gradient-to-t from-[#060d18]/70 to-transparent" />
 
               <div className="mx-auto w-full max-w-4xl">
-                <div
-                  className="
-                    group
-                    flex
-                    items-end
-                    gap-2
-                    rounded-[22px]
-                    border
-                    border-white/[0.12]
-                    bg-white/[0.07]
-                    p-1.5
-                    shadow-[0_8px_30px_rgba(0,0,0,0.14)]
-                    backdrop-blur-2xl
-                    transition-all
-                    duration-200
-                    focus-within:border-white/[0.2]
-                    focus-within:bg-white/[0.085]
-                    focus-within:shadow-[0_10px_35px_rgba(0,0,0,0.18)]
-                  "
-                >
+                <div className="group flex items-end gap-2 rounded-[22px] bg-[#091524]/80 px-2 py-2 shadow-[0_18px_50px_-28px_rgba(0,0,0,0.8)] ring-1 ring-white/[0.02] transition-all duration-200 focus-within:bg-[#0b192b]/90 focus-within:ring-cyan-300/[0.12] focus-within:shadow-[0_22px_60px_-28px_rgba(34,211,238,0.22)]">
                   <textarea
-                    className="
-                      min-h-[42px]
-                      max-h-32
-                      flex-1
-                      resize-none
-                      overflow-y-auto
-                      bg-transparent
-                      px-3
-                      py-2.5
-                      text-[15px]
-                      leading-5
-                      text-white
-                      outline-none
-                      placeholder:text-white/35
-                      scrollbar-thin
-                      scrollbar-track-transparent
-                      scrollbar-thumb-white/10
-                    "
+                    className="min-h-[44px] max-h-32 flex-1 resize-none overflow-y-auto bg-transparent px-3 py-2.5 text-[15px] leading-5 text-white outline-none placeholder:text-white/30 scrollbar-thin scrollbar-track-transparent scrollbar-thumb-white/10"
                     name="message"
                     id="message"
                     rows={1}
@@ -446,34 +308,11 @@ function GeneralChat() {
                     onClick={handleRequestLocationPermission}
                     disabled={isSending || !text.trim()}
                     aria-label="Send message"
-                    className={`
-                      flex
-                      h-10
-                      w-10
-                      shrink-0
-                      items-center
-                      justify-center
-                      rounded-full
-                      transition-all
-                      duration-200
-                      ${
-                        isSending || !text.trim()
-                          ? `
-                            cursor-not-allowed
-                            bg-white/[0.07]
-                            text-white/25
-                          `
-                          : `
-                            cursor-pointer
-                            bg-indigo-500
-                            text-white
-                            shadow-[0_4px_16px_rgba(99,102,241,0.35)]
-                            hover:bg-indigo-400
-                            hover:shadow-[0_6px_20px_rgba(99,102,241,0.45)]
-                            active:scale-90
-                          `
-                      }
-                    `}
+                    className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full transition-all duration-200 ${
+                      isSending || !text.trim()
+                        ? "cursor-not-allowed bg-white/[0.05] text-white/25"
+                        : "cursor-pointer bg-cyan-400 text-[#03131a] shadow-[0_6px_20px_rgba(34,211,238,0.28)] hover:bg-cyan-300 hover:shadow-[0_8px_24px_rgba(34,211,238,0.36)] active:scale-90"
+                    }`}
                   >
                     {isSending ? (
                       <Loader className="h-[18px] w-[18px] animate-spin" />
